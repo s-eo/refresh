@@ -28,3 +28,4 @@ const personWithEmail = { ...person, email: "elena@gmail.com" };
 const strings = ['qwe', 'wer', 'ert', 'rty'];
 
 strings.map(str => str[0].toUpperCase() + str.slice(1));
+

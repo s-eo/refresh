@@ -20,11 +20,9 @@ function tripleDelay(x, y, z) {
 }
 
 //    Write a function that does fetch("https://jsonplaceholder.typicode.com/posts/1") and logs the title.
-    async function placeholderFetcher() {
-        const url = "https://jsonplaceholder.typicode.com/posts/1";
-
-        const rawResp = await fetch(url);
-        const jsonResp = await rawResp.json();
-
-        console.log(jsonResp.title);
+    function placeholderFetcher () {
+        fetch("https://jsonplaceholder.typicode.com/posts/1")
+            .then(rawResp => rawResp.json())
+            .then(jsonResp => console.log(jsonResp.title))
+            .catch(error => console.error(error));
     }

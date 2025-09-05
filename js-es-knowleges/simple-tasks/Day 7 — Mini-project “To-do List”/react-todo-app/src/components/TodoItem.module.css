@@ -1,0 +1,12 @@
+.delete {
+    composes: button from './todo.module.css';
+}
+
+.title {
+    margin-left: 0.25em;
+}
+
+.img {
+    height: 1lh;
+    vertical-align: text-bottom;
+}

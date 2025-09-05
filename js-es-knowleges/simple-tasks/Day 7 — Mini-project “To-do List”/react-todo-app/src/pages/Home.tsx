@@ -1,10 +1,9 @@
 import React, {useState} from "react";
 
 import type {Todo} from "../types/todo";
-import TodoList from "../components/TodoList";
 
-import plusIcon from "../assets/plus.png";
-import './Home.css'
+import TodoList from "../components/TodoList";
+import NewTodoItem from "../components/NewTodoItem";
 
 const preDefinedTasks: Array<Todo> = [
     {
@@ -61,14 +60,11 @@ export default function Home() {
 
     return (
         <div>
-            <div>
-                <input
-                    type="text"
-                    value={newTaskName}
-                    onChange={handleTextChange}
-                />
-                <button className="add-button" onClick={handleAddingTask}><img className="plus-icon" src={plusIcon} alt="+" /></button>
-            </div>
+            <NewTodoItem
+                name={newTaskName}
+                onNameChange={handleTextChange}
+                addTask={handleAddingTask}
+            />
             <TodoList
                 todos={tasks}
                 toggleTodo={toggleTodo}

@@ -3,7 +3,7 @@ import React from "react";
 import type {Todo} from "../types/todo";
 
 import deleteIcon from "../assets/close.png";
-import "./TodoItem.css"
+import styles from  "./TodoItem.module.css"
 
 interface Props {
     todo: Todo;
@@ -24,11 +24,11 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
                 checked={completed}
                 onChange={handleChange}
             />
-            <span style={{ textDecoration: completed ? "line-through" : "none" }}>
+            <span className={styles.title} style={{ textDecoration: completed ? "line-through" : "none" }}>
               {title}
             </span>
-            <button className="remove-button" onClick={handleDelete}>
-                <img src={deleteIcon} alt="x" />
+            <button className={styles.delete} onClick={handleDelete}>
+                <img className={styles.img} src={deleteIcon} alt="x" />
             </button>
         </li>
     );

@@ -2,6 +2,9 @@ import React from "react";
 
 import type {Todo} from "../types/todo";
 
+import deleteIcon from "../assets/close.png";
+import "./TodoItem.css"
+
 interface Props {
     todo: Todo;
     toggleTodo: (id: number) => void;
@@ -9,17 +12,24 @@ interface Props {
 }
 
 export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
+    const { id, completed, title } = todo;
+
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => toggleTodo(id);
+    const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => deleteTodo(id);
+
     return (
         <li>
             <input
                 type="checkbox"
-                checked={todo.completed}
-                onChange={() => toggleTodo(todo.id)}
+                checked={completed}
+                onChange={handleChange}
             />
-            <span style={{ textDecoration: todo.completed ? "line-through" : "none" }}>
-        {todo.title}
-      </span>
-            <button onClick={() => deleteTodo(todo.id)}>❌</button>
+            <span style={{ textDecoration: completed ? "line-through" : "none" }}>
+              {title}
+            </span>
+            <button className="remove-button" onClick={handleDelete}>
+                <img src={deleteIcon} alt="x" />
+            </button>
         </li>
     );
 }

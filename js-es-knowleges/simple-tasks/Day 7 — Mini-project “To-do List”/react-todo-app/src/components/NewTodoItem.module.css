@@ -1,6 +1,11 @@
+.name {
+    padding: 5px;
+    margin-top: 2em;
+}
+
 .plus {
     transition: transform 0.4s ease;
-    height: 1.5lh;
+    height: 2lh;
 }
 .plus:hover {
     transform: rotate(180deg);
@@ -10,4 +15,5 @@
     composes: button from './todo.module.css';
     vertical-align: middle;
     padding: 2px 5px;
+    margin-left: 1em;
 }

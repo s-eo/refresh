@@ -1,24 +1,34 @@
-import React from "react";
+import React, {useState} from "react";
 
 import styles from './NewTodoItem.module.css';
 import plusIcon from "../assets/green-add-button.svg";
 
 interface Props {
-    name: string;
-    onNameChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-    addTask: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    addTask: (newName: string) => void;
 }
 
-export default function NewTodoItem({ name, onNameChange, addTask }: Props) {
+export default function NewTodoItem({ addTask }: Props) {
+    const [name, setName] = useState('');
+
+    const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setName(event.target.value);
+    }
+
+    const handleAddingTask = ()=> {
+        addTask(name);
+        setName('');
+    }
     return (
         <div>
             <input
                 name="name"
                 type="text"
                 value={name}
-                onChange={onNameChange}
+                onChange={handleTextChange}
+                placeholder="Add a new task"
+                className={styles.name}
             />
-            <button className={[styles.add, styles.button].join(" ")} onClick={addTask}><img className={styles.plus} src={plusIcon} alt="+"/>
+            <button className={[styles.add, styles.button].join(" ")} onClick={handleAddingTask}><img className={styles.plus} src={plusIcon} alt="+"/>
             </button>
         </div>
     );

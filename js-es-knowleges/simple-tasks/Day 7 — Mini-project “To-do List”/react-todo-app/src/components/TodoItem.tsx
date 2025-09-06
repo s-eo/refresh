@@ -18,7 +18,7 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
     const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => deleteTodo(id);
 
     return (
-        <li>
+        <li className={styles.line}>
             <input
                 type="checkbox"
                 checked={completed}

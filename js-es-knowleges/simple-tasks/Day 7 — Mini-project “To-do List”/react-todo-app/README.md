@@ -1,4 +1,16 @@
-# Getting Started with Create React App
+# Mini-project “To-do List” (React + TS)
+
+## Goal:
+
+Build a simple To-do List app with React + TypeScript.
+
+## Features:
+
+- Add a new task
+
+- Mark as completed
+
+- Delete a task
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

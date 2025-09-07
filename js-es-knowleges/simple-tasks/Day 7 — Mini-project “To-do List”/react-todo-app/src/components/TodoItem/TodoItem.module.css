@@ -4,7 +4,7 @@
 }
 
 .delete {
-    composes: button from './todo.module.css';
+    composes: button from '../todo.module.css';
 }
 
 .title {

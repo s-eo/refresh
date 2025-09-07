@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import type {Todo} from "./types/todo";
 
-import NewTodoItem from "./components/NewTodoItem";
+import NewTodoItem from "./components/NewTodoItem/NewTodoItem";
 import TodoList from "./components/TodoList";
 
 import logo from './logo.svg';
 import './App.css';
+import Card from "./components/Card/Card";
 
 
 const preDefinedTasks: Array<Todo> = [
@@ -66,12 +67,16 @@ function App() {
         </header>
         <img src={logo} className="App-logo" alt="logo"/>
         <div>
-            <NewTodoItem addTask={addTask} />
-            <TodoList
-                todos={tasks}
-                toggleTodo={toggleTodo}
-                deleteTodo={deleteTodo}
-            />
+            <Card>
+                <NewTodoItem addTask={addTask} />
+            </Card>
+            <Card>
+                <TodoList
+                    todos={tasks}
+                    toggleTodo={toggleTodo}
+                    deleteTodo={deleteTodo}
+                />
+            </Card>
         </div>
       </article>
     </div>

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 import styles from './NewTodoItem.module.css';
-import plusIcon from "../assets/green-add-button.svg";
+import plusIcon from "../../assets/green-add-button.svg";
 
 interface Props {
     addTask: (newName: string) => void;

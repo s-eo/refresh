@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import type {Todo} from "./types/todo";
 
 import NewTodoItem from "./components/NewTodoItem/NewTodoItem";
@@ -7,6 +7,8 @@ import TodoList from "./components/TodoList";
 import logo from './logo.svg';
 import './App.css';
 import Card from "./components/Card/Card";
+import TodoFilter, {filterFunction} from "./components/TodoFilter/TodoFilter";
+import {Filter} from "./types/filter";
 
 
 const preDefinedTasks: Array<Todo> = [
@@ -26,9 +28,14 @@ const preDefinedTasks: Array<Todo> = [
         completed: false,
     }
 ];
+export const filters: Array<Filter> = ['all', 'active', 'completed'];
+
 
 function App() {
-    const [tasks, setTasks] = useState(preDefinedTasks);
+    const [tasks, setTasks] = useState<Todo[]>(preDefinedTasks);
+    const [filter, setFilter]  = useState<Filter>("all");
+
+    const visibleTasks = useMemo(() => filterFunction(tasks, filter), [tasks, filter]);
 
     const toggleTodo = (id: number) => {
         setTasks(tasks.map(task => {
@@ -71,8 +78,9 @@ function App() {
                 <NewTodoItem addTask={addTask} />
             </Card>
             <Card>
+                <TodoFilter filter={filter} setFilter={setFilter} />
                 <TodoList
-                    todos={tasks}
+                    todos={visibleTasks}
                     toggleTodo={toggleTodo}
                     deleteTodo={deleteTodo}
                 />

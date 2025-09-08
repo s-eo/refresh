@@ -7,6 +7,7 @@ import TodoList from "./components/TodoList";
 import logo from './logo.svg';
 import './App.css';
 import Card from "./components/Card/Card";
+import TodoFilter from "./components/TodoFilter/TodoFilter";
 
 
 const preDefinedTasks: Array<Todo> = [
@@ -29,6 +30,7 @@ const preDefinedTasks: Array<Todo> = [
 
 function App() {
     const [tasks, setTasks] = useState(preDefinedTasks);
+    const [visibleTasks, setVisibleTasks] = useState(preDefinedTasks);
 
     const toggleTodo = (id: number) => {
         setTasks(tasks.map(task => {
@@ -71,8 +73,9 @@ function App() {
                 <NewTodoItem addTask={addTask} />
             </Card>
             <Card>
+                <TodoFilter tasks={tasks} setVisibleTasks={setVisibleTasks} />
                 <TodoList
-                    todos={tasks}
+                    todos={visibleTasks}
                     toggleTodo={toggleTodo}
                     deleteTodo={deleteTodo}
                 />

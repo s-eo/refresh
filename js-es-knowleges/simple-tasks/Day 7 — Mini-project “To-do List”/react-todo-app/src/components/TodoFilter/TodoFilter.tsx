@@ -1,16 +1,19 @@
-import React, {useCallback, useMemo, useState} from 'react';
-import Card from "../Card/Card";
+import React from 'react';
+
 import {Filter} from "../../types/filter";
-import {filters} from "../../App";
+import {Todo} from "../../types/todo";
+
+import Card from "../Card/Card";
 
 import styles from './TodoFilter.module.css';
-import {Todo} from "../../types/todo";
+
 
 interface TodoFilterProps {
     filter: Filter;
     setFilter: (filter: Filter) => void;
 }
 
+const filters: Array<Filter> = ['all', 'active', 'completed'];
 export const filterFunction = (tasks: Array<Todo>, filter: Filter): Array<Todo> => {
 
     switch (filter) {

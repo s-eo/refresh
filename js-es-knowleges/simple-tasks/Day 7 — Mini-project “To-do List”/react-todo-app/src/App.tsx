@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
 import type {Todo} from "./types/todo";
 import {Filter} from "./types/filter";
@@ -7,36 +7,24 @@ import NewTodoItem from "./components/NewTodoItem/NewTodoItem";
 import TodoList from "./components/TodoList";
 import Card from "./components/Card/Card";
 import TodoFilter, {filterFunction} from "./components/TodoFilter/TodoFilter";
+import {getTodos, storeTodos} from "./components/LocalStorage/LocalStorage-helpers";
 
 import logo from './logo.svg';
 import './App.css';
 
 
-const preDefinedTasks: Array<Todo> = [
-    {
-        id: 1,
-        title: 'Create project',
-        completed: true,
-    },
-    {
-        id: 2,
-        title: 'Create basic components',
-        completed: true,
-    },
-    {
-        id: 3,
-        title: 'Make fine vue',
-        completed: false,
-    }
-];
-export const filters: Array<Filter> = ['all', 'active', 'completed'];
-
-
 function App() {
-    const [tasks, setTasks] = useState<Todo[]>(preDefinedTasks);
+    const [tasks, setTasks] = useState<Todo[]>([]);
     const [filter, setFilter]  = useState<Filter>("all");
 
     const visibleTasks = useMemo(() => filterFunction(tasks, filter), [tasks, filter]);
+
+    useEffect(() => setTasks(getTodos), []);
+
+    const saveTasks = (tasks: Array<Todo>) => {
+        setTasks(tasks);
+        storeTodos(tasks);
+    };
 
   return (
     <div className="App">
@@ -49,14 +37,14 @@ function App() {
             <Card>
                 <NewTodoItem
                     tasks={tasks}
-                    setTasks={setTasks}
+                    setTasks={saveTasks}
                 />
             </Card>
             <Card>
                 <TodoFilter filter={filter} setFilter={setFilter} />
                 <TodoList
                     tasks={visibleTasks}
-                    setTasks={setTasks}
+                    setTasks={saveTasks}
                 />
             </Card>
         </div>

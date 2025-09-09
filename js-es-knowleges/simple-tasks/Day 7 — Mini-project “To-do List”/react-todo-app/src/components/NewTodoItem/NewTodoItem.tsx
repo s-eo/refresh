@@ -2,13 +2,30 @@ import React, {useState} from "react";
 
 import styles from './NewTodoItem.module.css';
 import plusIcon from "../../assets/green-add-button.svg";
+import {Todo} from "../../types/todo";
 
 interface Props {
-    addTask: (newName: string) => void;
+    setTasks: (tasks: Todo[]) => void;
+    tasks: Todo[];
 }
 
-export default function NewTodoItem({ addTask }: Props) {
+const getNextId = (tasks: Todo[]): number => {
+    let maxId = 0;
+    tasks.forEach(task => {
+        if (task.id > maxId) {
+            maxId = task.id;
+        }
+    })
+
+    return ++maxId;
+}
+
+export default function NewTodoItem({ tasks, setTasks }: Props) {
     const [name, setName] = useState('');
+
+    const addTask = (newTaskName: string)=> {
+        setTasks([...tasks, { completed: false, title: newTaskName, id: getNextId(tasks) }]);
+    }
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setName(event.target.value);

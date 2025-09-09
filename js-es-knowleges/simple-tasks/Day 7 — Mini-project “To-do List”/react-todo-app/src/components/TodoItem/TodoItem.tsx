@@ -1,9 +1,9 @@
 import React from "react";
 
-import type {Todo} from "../types/todo";
+import type {Todo} from "../../types/todo";
 
-import deleteIcon from "../assets/close.png";
-import styles from  "./TodoItem.module.css"
+import deleteIcon from "../../assets/close.png";
+import styles from "./TodoItem.module.css"
 
 interface Props {
     todo: Todo;

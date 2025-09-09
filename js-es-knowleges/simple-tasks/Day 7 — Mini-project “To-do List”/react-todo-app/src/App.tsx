@@ -1,11 +1,13 @@
 import React, {useState} from 'react';
 import type {Todo} from "./types/todo";
 
-import NewTodoItem from "./components/NewTodoItem";
+import NewTodoItem from "./components/NewTodoItem/NewTodoItem";
 import TodoList from "./components/TodoList";
 
 import logo from './logo.svg';
 import './App.css';
+import Card from "./components/Card/Card";
+import TodoFilter from "./components/TodoFilter/TodoFilter";
 
 
 const preDefinedTasks: Array<Todo> = [
@@ -28,6 +30,7 @@ const preDefinedTasks: Array<Todo> = [
 
 function App() {
     const [tasks, setTasks] = useState(preDefinedTasks);
+    const [visibleTasks, setVisibleTasks] = useState(preDefinedTasks);
 
     const toggleTodo = (id: number) => {
         setTasks(tasks.map(task => {
@@ -66,12 +69,17 @@ function App() {
         </header>
         <img src={logo} className="App-logo" alt="logo"/>
         <div>
-            <NewTodoItem addTask={addTask} />
-            <TodoList
-                todos={tasks}
-                toggleTodo={toggleTodo}
-                deleteTodo={deleteTodo}
-            />
+            <Card>
+                <NewTodoItem addTask={addTask} />
+            </Card>
+            <Card>
+                <TodoFilter tasks={tasks} setVisibleTasks={setVisibleTasks} />
+                <TodoList
+                    todos={visibleTasks}
+                    toggleTodo={toggleTodo}
+                    deleteTodo={deleteTodo}
+                />
+            </Card>
         </div>
       </article>
     </div>

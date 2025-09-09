@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 
 import styles from './NewTodoItem.module.css';
-import plusIcon from "../assets/green-add-button.svg";
+import plusIcon from "../../assets/green-add-button.svg";
 
 interface Props {
     addTask: (newName: string) => void;
@@ -14,12 +14,17 @@ export default function NewTodoItem({ addTask }: Props) {
         setName(event.target.value);
     }
 
-    const handleAddingTask = ()=> {
+    const handleAddingTask = (event: React.FormEvent)=> {
+        event.preventDefault();
+
+        if (!name.trim()) return;
+
         addTask(name);
         setName('');
     }
+
     return (
-        <div>
+        <form onSubmit={handleAddingTask}>
             <input
                 name="name"
                 type="text"
@@ -28,8 +33,11 @@ export default function NewTodoItem({ addTask }: Props) {
                 placeholder="Add a new task"
                 className={styles.name}
             />
-            <button className={[styles.add, styles.button].join(" ")} onClick={handleAddingTask}><img className={styles.plus} src={plusIcon} alt="+"/>
+            <button
+                type="submit"
+                className={[styles.add, styles.button].join(" ")}
+            ><img className={styles.plus} src={plusIcon} alt="+"/>
             </button>
-        </div>
+        </form>
     );
 }

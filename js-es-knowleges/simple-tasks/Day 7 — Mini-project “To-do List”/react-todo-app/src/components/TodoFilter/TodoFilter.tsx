@@ -1,39 +1,37 @@
-import React, {useState} from 'react';
-import Card from "../Card/Card";
+import React from 'react';
+
 import {Filter} from "../../types/filter";
 import {Todo} from "../../types/todo";
 
+import Card from "../Card/Card";
+
 import styles from './TodoFilter.module.css';
 
+
 interface TodoFilterProps {
-    tasks: Array<Todo>;
-    setVisibleTasks: (tasks: Array<Todo>) => void;
+    filter: Filter;
+    setFilter: (filter: Filter) => void;
 }
 
-
 const filters: Array<Filter> = ['all', 'active', 'completed'];
+export const filterFunction = (tasks: Array<Todo>, filter: Filter): Array<Todo> => {
 
-export default function TodoFilter({ tasks, setVisibleTasks }: TodoFilterProps) {
-    const [filter, setFilter]  = useState('all');
+    switch (filter) {
+        case 'active':
+            return tasks.filter(task => !task.completed);
 
+        case 'completed':
+            return tasks.filter(task => task.completed);
+
+        case 'all':
+        default:
+            return tasks.slice();
+    }
+}
+
+export default function TodoFilter({ filter, setFilter }: TodoFilterProps) {
     const onNewFilter = (filter: Filter) => (event: React.MouseEvent) => {
         setFilter(filter);
-
-        let visibleTasks = [];
-        switch (filter) {
-            case 'active':
-                visibleTasks = tasks.filter(task => !task.completed)
-                break;
-            case 'completed':
-                visibleTasks = tasks.filter(task => task.completed)
-                break;
-
-            case 'all':
-            default:
-                visibleTasks = tasks.slice();
-        }
-
-        setVisibleTasks(visibleTasks);
     }
 
     return (

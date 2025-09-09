@@ -1,65 +1,30 @@
-import React, {useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
+
 import type {Todo} from "./types/todo";
+import {Filter} from "./types/filter";
 
 import NewTodoItem from "./components/NewTodoItem/NewTodoItem";
 import TodoList from "./components/TodoList";
+import Card from "./components/Card/Card";
+import TodoFilter, {filterFunction} from "./components/TodoFilter/TodoFilter";
+import {getTodos, storeTodos} from "./components/LocalStorage/LocalStorage-helpers";
 
 import logo from './logo.svg';
 import './App.css';
-import Card from "./components/Card/Card";
-import TodoFilter from "./components/TodoFilter/TodoFilter";
 
-
-const preDefinedTasks: Array<Todo> = [
-    {
-        id: 1,
-        title: 'Create project',
-        completed: true,
-    },
-    {
-        id: 2,
-        title: 'Create basic components',
-        completed: true,
-    },
-    {
-        id: 3,
-        title: 'Make fine vue',
-        completed: false,
-    }
-];
 
 function App() {
-    const [tasks, setTasks] = useState(preDefinedTasks);
-    const [visibleTasks, setVisibleTasks] = useState(preDefinedTasks);
+    const [tasks, setTasks] = useState<Todo[]>([]);
+    const [filter, setFilter]  = useState<Filter>("all");
 
-    const toggleTodo = (id: number) => {
-        setTasks(tasks.map(task => {
-            if (task.id === id) {
-                task.completed = !task.completed;
-            }
+    const visibleTasks = useMemo(() => filterFunction(tasks, filter), [tasks, filter]);
 
-            return task;
-        }))
-    }
+    useEffect(() => setTasks(getTodos), []);
 
-    const deleteTodo = (id: number) => {
-        setTasks(tasks.filter(task => task.id !== id))
-    }
-
-    const getNextId = () => {
-        let maxId = 0;
-        tasks.forEach(task => {
-            if (task.id > maxId) {
-                maxId = task.id;
-            }
-        })
-
-        return ++maxId;
-    }
-
-    const addTask = (newTaskName: string)=> {
-        setTasks([...tasks, { completed: false, title: newTaskName, id: getNextId() }]);
-    }
+    const saveTasks = (tasks: Array<Todo>) => {
+        setTasks(tasks);
+        storeTodos(tasks);
+    };
 
   return (
     <div className="App">
@@ -70,14 +35,16 @@ function App() {
         <img src={logo} className="App-logo" alt="logo"/>
         <div>
             <Card>
-                <NewTodoItem addTask={addTask} />
+                <NewTodoItem
+                    tasks={tasks}
+                    setTasks={saveTasks}
+                />
             </Card>
             <Card>
-                <TodoFilter tasks={tasks} setVisibleTasks={setVisibleTasks} />
+                <TodoFilter filter={filter} setFilter={setFilter} />
                 <TodoList
-                    todos={visibleTasks}
-                    toggleTodo={toggleTodo}
-                    deleteTodo={deleteTodo}
+                    tasks={visibleTasks}
+                    setTasks={saveTasks}
                 />
             </Card>
         </div>

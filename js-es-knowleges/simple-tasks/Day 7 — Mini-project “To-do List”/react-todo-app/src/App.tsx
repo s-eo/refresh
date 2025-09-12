@@ -14,17 +14,15 @@ import './App.css';
 
 
 function App() {
-    const [tasks, setTasks] = useState<Todo[]>([]);
+    const [tasks, setTasks] = useState<Todo[]>(() => getTodos());
     const [filter, setFilter]  = useState<Filter>("all");
 
     const visibleTasks = useMemo(() => filterFunction(tasks, filter), [tasks, filter]);
 
-    useEffect(() => setTasks(getTodos), []);
-
-    const saveTasks = (tasks: Array<Todo>) => {
-        setTasks(tasks);
+    // save all changes to Local Storage
+    useEffect(() => {
         storeTodos(tasks);
-    };
+    }, [tasks]);
 
   return (
     <div className="App">
@@ -37,14 +35,14 @@ function App() {
             <Card>
                 <NewTodoItem
                     tasks={tasks}
-                    setTasks={saveTasks}
+                    setTasks={setTasks}
                 />
             </Card>
             <Card>
                 <TodoFilter filter={filter} setFilter={setFilter} />
                 <TodoList
                     tasks={visibleTasks}
-                    setTasks={saveTasks}
+                    setTasks={setTasks}
                 />
             </Card>
         </div>

@@ -9,10 +9,3 @@
 .plus:hover {
     transform: rotate(180deg);
 }
-
-.add {
-    composes: button from '../todo.module.css';
-    vertical-align: middle;
-    padding: 2px 5px;
-    margin-left: 1em;
-}

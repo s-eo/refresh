@@ -6,6 +6,7 @@ import {Todo} from "../../types/todo";
 import Card from "../Card/Card";
 
 import styles from './TodoFilter.module.css';
+import Button from "../UI/Button/Button";
 
 
 interface TodoFilterProps {
@@ -37,11 +38,12 @@ export default function TodoFilter({ filter, setFilter }: TodoFilterProps) {
     return (
         <Card>
             {filters.map((filterType: Filter) => (
-                <button
+                <Button
+                    variant={filter === filterType ? 'primary' : 'outline'}
                     key={filterType}
                     onClick={onNewFilter(filterType)}
                     className={[styles.button, filter === filterType ? styles.active : ''].join(" ")}
-                >{filterType}</button>
+                >{filterType}</Button>
             ))}
         </Card>
     );

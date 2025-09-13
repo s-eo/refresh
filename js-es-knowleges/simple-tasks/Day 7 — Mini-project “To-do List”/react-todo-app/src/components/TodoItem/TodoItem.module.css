@@ -3,10 +3,6 @@
     font-size: 0.9em;
 }
 
-.delete {
-    composes: button from '../todo.module.css';
-}
-
 .title {
     margin-left: 0.25em;
 }

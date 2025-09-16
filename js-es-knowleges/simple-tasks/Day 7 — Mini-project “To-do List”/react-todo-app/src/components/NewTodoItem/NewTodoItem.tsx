@@ -1,9 +1,10 @@
 import React, {useState} from "react";
 
-import styles from './NewTodoItem.module.css';
-import plusIcon from "../../assets/green-add-button.svg";
 import {Todo} from "../../types/todo";
+
+import plusIcon from "../../assets/plus.svg";
 import Button from "../UI/Button/Button";
+import styles from './NewTodoItem.module.css';
 
 interface Props {
     setTasks: (tasks: Todo[]) => void;
@@ -42,7 +43,10 @@ export default function NewTodoItem({ tasks, setTasks }: Props) {
     }
 
     return (
-        <form onSubmit={handleAddingTask}>
+        <form
+            onSubmit={handleAddingTask}
+            className={styles.form}
+        >
             <input
                 name="name"
                 type="text"
@@ -52,7 +56,7 @@ export default function NewTodoItem({ tasks, setTasks }: Props) {
                 className={styles.name}
             />
             <Button
-                variant="image"
+                variant="primary"
                 type="submit"
                 className={[styles.add, styles.button].join(" ")}
             ><img className={styles.plus} src={plusIcon} alt="+"/>

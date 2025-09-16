@@ -1,10 +1,24 @@
+.form {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+}
+
 .name {
-    padding: 5px;
+    flex: 1;
+    padding: 10px;
+}
+
+.add {
+    border-radius: 25px;
+    padding: 5px 20px;
+    margin-left: 1em;
 }
 
 .plus {
     transition: transform 0.4s ease;
-    height: 2lh;
+    height: 1.6lh;
+    vertical-align: text-bottom;
 }
 .plus:hover {
     transform: rotate(180deg);

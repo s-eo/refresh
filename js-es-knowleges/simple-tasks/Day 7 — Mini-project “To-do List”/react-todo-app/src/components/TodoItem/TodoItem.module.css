@@ -1,6 +1,20 @@
 .line {
     margin-top: 0.5em;
     font-size: 0.9em;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.line:nth-of-type(even) {
+    background-color: var(--grey-greeny);
+}
+
+@media (prefers-color-scheme: dark) {
+    .line {
+        background-color: var(--dark-green);
+    }
 }
 
 .title {

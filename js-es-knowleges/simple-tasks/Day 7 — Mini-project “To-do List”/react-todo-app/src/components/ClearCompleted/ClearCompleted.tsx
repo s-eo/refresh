@@ -20,7 +20,7 @@ export default function ClearCompleted({ tasks, setTasks }: Props) {
     return (
         <div className={styles.container}>
             <Button
-                variant='normal'
+                variant='danger'
                 onClick={handleClick}
                 className={styles.clear}
             >Clear completed</Button>

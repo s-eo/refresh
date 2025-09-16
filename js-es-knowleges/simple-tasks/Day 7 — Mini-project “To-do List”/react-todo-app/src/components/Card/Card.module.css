@@ -6,3 +6,7 @@
     margin: 1rem 0;
     user-select: none;
 }
+
+.card.half-window {
+    width: 50vw;
+}

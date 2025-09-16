@@ -4,8 +4,9 @@ import type {Todo} from "./types/todo";
 import {Filter} from "./types/filter";
 
 import NewTodoItem from "./components/NewTodoItem/NewTodoItem";
-import TodoList from "./components/TodoList";
+import TodoList from "./components/TodoList/TodoList";
 import Card from "./components/Card/Card";
+import ClearCompleted from "./components/ClearCompleted/ClearCompleted";
 import TodoFilter, {filterFunction} from "./components/TodoFilter/TodoFilter";
 import {getTodos, storeTodos} from "./components/LocalStorage/LocalStorage-helpers";
 
@@ -27,25 +28,28 @@ function App() {
   return (
     <div className="App">
       <article className="App-content">
-        <header>
-            <h1>To-Do list</h1>
-        </header>
-        <img src={logo} className="App-logo" alt="logo"/>
-        <div>
-            <Card>
-                <NewTodoItem
-                    tasks={tasks}
-                    setTasks={setTasks}
-                />
-            </Card>
-            <Card>
-                <TodoFilter filter={filter} setFilter={setFilter} />
-                <TodoList
-                    tasks={visibleTasks}
-                    setTasks={setTasks}
-                />
-            </Card>
-        </div>
+          <Card width="half-window">
+              <header>
+                  <h1>To-Do list</h1>
+              </header>
+              <img src={logo} className="App-logo" alt="logo"/>
+              <div>
+                  <Card>
+                      <NewTodoItem
+                          tasks={tasks}
+                          setTasks={setTasks}
+                      />
+                      <TodoFilter filter={filter} setFilter={setFilter}/>
+                      <ClearCompleted tasks={tasks} setTasks={setTasks}/>
+                  </Card>
+                  <Card>
+                      <TodoList
+                          tasks={visibleTasks}
+                          setTasks={setTasks}
+                      />
+                  </Card>
+              </div>
+          </Card>
       </article>
     </div>
   );

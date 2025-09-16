@@ -20,16 +20,19 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
 
     return (
         <li className={styles.line}>
-            <input
-                type="checkbox"
-                checked={completed}
-                onChange={handleChange}
-            />
-            <span className={styles.title} style={{textDecoration: completed ? "line-through" : "none"}}>
-              {title}
+            <span>
+                <input
+                    type="checkbox"
+                    checked={completed}
+                    onChange={handleChange}
+                />
+                <span className={styles.title} style={{textDecoration: completed ? "line-through" : "none"}}>
+                  {title}
+                </span>
             </span>
+
             <Button
-                variant="normal"
+                variant="danger"
                 onClick={handleDelete}
             >
                 <img className={styles.img} src={deleteIcon} alt="x"/>

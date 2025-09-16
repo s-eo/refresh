@@ -1,8 +1,10 @@
 import React from "react";
 
-import type {Todo} from "../types/todo";
+import type {Todo} from "../../types/todo";
 
-import TodoItem from "./TodoItem/TodoItem";
+import TodoItem from "../TodoItem/TodoItem";
+
+import styles from './TodoList.module.css';
 
 interface Props {
     tasks: Todo[];
@@ -25,15 +27,15 @@ export default function TodoList({ tasks, setTasks }: Props) {
     }
 
     return (
-        <ul>
-            {tasks.map(todo => (
+        <ul className={styles.list}>
+            {tasks.length ? tasks.map(todo => (
                 <TodoItem
                     key={todo.id}
                     todo={todo}
                     toggleTodo={toggleTodo}
                     deleteTodo={deleteTodo}
                 />
-            ))}
+            )) : <span>No more tasks there</span>}
         </ul>
     );
 }

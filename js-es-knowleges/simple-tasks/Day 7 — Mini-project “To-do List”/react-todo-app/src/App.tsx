@@ -10,7 +10,6 @@ import ClearCompleted from "./components/ClearCompleted/ClearCompleted";
 import TodoFilter, {filterFunction} from "./components/TodoFilter/TodoFilter";
 import {getTodos, storeTodos} from "./components/LocalStorage/LocalStorage-helpers";
 
-import logo from './logo.svg';
 import './App.css';
 
 
@@ -32,7 +31,6 @@ function App() {
               <header>
                   <h1>To-Do list</h1>
               </header>
-              <img src={logo} className="App-logo" alt="logo"/>
               <div>
                   <Card>
                       <NewTodoItem

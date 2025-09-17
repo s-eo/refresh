@@ -3,8 +3,7 @@ import React from 'react';
 import {Filter} from "../../types/filter";
 import {Todo} from "../../types/todo";
 
-import Card from "../Card/Card";
-
+import Button from "../UI/Button/Button";
 import styles from './TodoFilter.module.css';
 
 
@@ -35,14 +34,15 @@ export default function TodoFilter({ filter, setFilter }: TodoFilterProps) {
     }
 
     return (
-        <Card>
+        <div className={styles.container}>
             {filters.map((filterType: Filter) => (
-                <button
+                <Button
+                    variant={filter === filterType ? 'primary' : 'outline'}
                     key={filterType}
                     onClick={onNewFilter(filterType)}
-                    className={[styles.button, filter === filterType ? styles.active : ''].join(" ")}
-                >{filterType}</button>
-            ))}
-        </Card>
+                    className={[styles.button].join(" ")}
+                >{filterType}</Button>
+             ))}
+        </div>
     );
 }

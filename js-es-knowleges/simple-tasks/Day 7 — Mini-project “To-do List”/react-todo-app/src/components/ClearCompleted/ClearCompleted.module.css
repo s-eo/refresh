@@ -1,0 +1,10 @@
+.container {
+    display: flex;
+    justify-content: end;
+    margin-top: 1rem;
+}
+
+.clear {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+}

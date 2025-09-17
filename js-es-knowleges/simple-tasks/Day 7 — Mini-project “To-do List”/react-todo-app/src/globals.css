@@ -1,3 +1,15 @@
+:root {
+    --pinky: #fbe3e8;
+    --pinky-hover: #dbc3c8;
+    --blue-greeny: #5cbdb9;
+    --sea-greeny: #68b7b4;
+    --teeny-greeny: #ebf6f5;
+    --grey-greeny: #f6faf9;
+    --dark-green: #487e78;
+    --dark-grey: #343737;
+;
+}
+
 li {
     list-style-type: none;
     text-align: left;
@@ -8,5 +20,7 @@ input[type="checkbox"], button {
 }
 
 h1 {
-    color: white;
+    color: var(--dark-green);
+    font-weight: 600;
+    font-family: Serif;
 }

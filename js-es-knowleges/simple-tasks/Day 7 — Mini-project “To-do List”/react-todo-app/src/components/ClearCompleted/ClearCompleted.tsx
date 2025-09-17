@@ -4,7 +4,6 @@ import Button from "../UI/Button/Button";
 import {Todo} from "../../types/todo";
 
 import styles from "./ClearCompleted.module.css";
-import clsx from "clsx";
 
 interface Props {
     tasks: Array<Todo>;

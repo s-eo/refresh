@@ -9,8 +9,9 @@ import Card from "./components/Card/Card";
 import ClearCompleted from "./components/ClearCompleted/ClearCompleted";
 import TodoFilter, {filterFunction} from "./components/TodoFilter/TodoFilter";
 import {getTodos, storeTodos} from "./components/LocalStorage/LocalStorage-helpers";
+import FunctionalityRow from "./components/FunctionalityRow/FunctionalityRow";
+import RemainPanel from "./components/RemainPanel/RemainPanel";
 
-import logo from './logo.svg';
 import './App.css';
 
 
@@ -32,7 +33,6 @@ function App() {
               <header>
                   <h1>To-Do list</h1>
               </header>
-              <img src={logo} className="App-logo" alt="logo"/>
               <div>
                   <Card>
                       <NewTodoItem
@@ -40,7 +40,10 @@ function App() {
                           setTasks={setTasks}
                       />
                       <TodoFilter filter={filter} setFilter={setFilter}/>
-                      <ClearCompleted tasks={tasks} setTasks={setTasks}/>
+                      <FunctionalityRow>
+                          <RemainPanel tasks={tasks} />
+                          <ClearCompleted tasks={tasks} setTasks={setTasks}/>
+                      </FunctionalityRow>
                   </Card>
                   <Card>
                       <TodoList

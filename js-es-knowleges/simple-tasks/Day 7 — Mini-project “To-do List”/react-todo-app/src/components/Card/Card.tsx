@@ -5,10 +5,10 @@ import clsx from "clsx";
 
 interface CardProps {
     children: ReactNode;
-    width?: 'compact' | 'half-window';
+    width?: 'initial' | 'column';
 }
 
-export default function Card({ children, width = 'compact' }: CardProps) {
+export default function Card({ children, width = 'initial' }: CardProps) {
     return (
         <div className={clsx(styles.card, styles[width])}>
             {children}

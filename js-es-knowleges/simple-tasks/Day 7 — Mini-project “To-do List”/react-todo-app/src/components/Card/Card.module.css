@@ -7,6 +7,12 @@
     user-select: none;
 }
 
-.card.half-window {
-    width: 50vw;
+.card.column {
+    width: 90vw;
+}
+
+@media (min-width: 480px) {
+    .card.column {
+        width: 50vw;
+    }
 }

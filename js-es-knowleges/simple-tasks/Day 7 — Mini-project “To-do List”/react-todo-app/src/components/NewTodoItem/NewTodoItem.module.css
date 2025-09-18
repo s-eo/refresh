@@ -1,18 +1,38 @@
 .form {
-   display: flex;
-   align-items: center;
-   justify-content: space-between;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
 }
 
 .name {
     flex: 1;
     padding: 10px;
+    align-items: stretch;
 }
 
 .add {
-    border-radius: 25px;
-    padding: 5px 20px;
-    margin-left: 1em;
+    border-radius: 5px;
+    padding: 3px 5px;
+    align-self: end;
+}
+
+@media (min-width: 480px) {
+    .form {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    .name {
+        align-self: center;
+    }
+
+    .add {
+        border-radius: 25px;
+        padding: 5px 20px;
+        margin-left: 1em;
+        align-self: center;
+    }
 }
 
 .plus {

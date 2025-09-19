@@ -2,8 +2,8 @@ import React from 'react';
 
 import {Filter} from "../../types/filter";
 import {Todo} from "../../types/todo";
-
 import Button from "../UI/Button/Button";
+
 import styles from './TodoFilter.module.css';
 
 

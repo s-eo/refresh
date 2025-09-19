@@ -47,7 +47,8 @@ function App() {
                   </Card>
                   <Card>
                       <TodoList
-                          tasks={visibleTasks}
+                          tasks={tasks}
+                          visibleTasks={visibleTasks}
                           setTasks={setTasks}
                       />
                   </Card>

@@ -8,18 +8,24 @@ import styles from './TodoList.module.css';
 
 interface Props {
     tasks: Todo[];
+    visibleTasks: Todo[];
     setTasks: (tasks: Todo[]) => void;
 }
 
-export default function TodoList({ tasks, setTasks }: Props) {
+export default function TodoList({ visibleTasks, tasks, setTasks }: Props) {
     const toggleTodo = (id: number) => {
-        setTasks(tasks.map(task => {
+        const nextTodos = tasks.map(task => {
             if (task.id === id) {
-                task.completed = !task.completed;
+                return {
+                    ...task,
+                    completed: !task.completed,
+                }
             }
 
             return task;
-        }))
+        })
+
+        setTasks(nextTodos);
     }
 
     const deleteTodo = (id: number) => {
@@ -28,7 +34,7 @@ export default function TodoList({ tasks, setTasks }: Props) {
 
     return (
         <ul className={styles.list}>
-            {tasks.length ? tasks.map(todo => (
+            {visibleTasks.length ? visibleTasks.map(todo => (
                 <TodoItem
                     key={todo.id}
                     todo={todo}

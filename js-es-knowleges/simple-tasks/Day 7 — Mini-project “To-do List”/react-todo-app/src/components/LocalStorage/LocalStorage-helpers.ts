@@ -17,6 +17,7 @@ const preDefinedTasks: Array<Todo> = [
         id: 3,
         title: 'Make fine vue',
         completed: false,
+        deadline: '1758229200000',
     }
 ];
 

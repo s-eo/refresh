@@ -14,13 +14,13 @@ interface Props {
 }
 
 export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
-    const { id, completed, title, deadline } = todo;
+    const { id, completed, title, deadline: dLTimestamp } = todo;
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => toggleTodo(id);
     const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => deleteTodo(id);
 
-    const date = useMemo(() => deadline ? new Date(+deadline).toDateString() : '', [deadline]);
-    const isStale = useMemo(() => deadline ? +deadline < Date.now() : false, [deadline]);
+    const deadline = useMemo(() => dLTimestamp ? new Date(+dLTimestamp).toDateString() : '', [dLTimestamp]);
+    const isStale = useMemo(() => dLTimestamp ? +dLTimestamp < Date.now() : false, [dLTimestamp]);
 
     return (
         <li className={styles.container}>
@@ -43,7 +43,7 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
                 <img className={styles.img} src={deleteIcon} alt="x"/>
             </Button>
             {deadline && (<div className={clsx(styles.line, styles.deadline, isStale && styles.stale)}>
-                <span>Until {date}</span>
+                <span>Until {deadline}</span>
             </div>)}
         </li>
     );

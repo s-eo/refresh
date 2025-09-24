@@ -1,4 +1,4 @@
-import React, {ChangeEvent, useMemo, useState} from "react";
+import React, {useState, useRef, RefObject, useCallback} from "react";
 
 import {Todo} from "../../types/todo";
 
@@ -6,7 +6,6 @@ import plusIcon from "../../assets/plus.svg";
 import Button from "../UI/Button/Button";
 import styles from './NewTodoItem.module.css';
 import FunctionalityRow from "../FunctionalityRow/FunctionalityRow";
-import ToggleSwitch from "../UI/ToggleSwitch/ToggleSwitch";
 import DeadlinePicker from "../DeadlinePicker/DeadlinePicker";
 
 interface Props {
@@ -29,9 +28,10 @@ export default function NewTodoItem({ tasks, setTasks }: Props) {
     const [name, setName] = useState<string>('');
     const [deadline, setDeadline] = useState<Date | undefined>(undefined);
 
+    const nameRef = useRef<HTMLInputElement>(null);
+
     const addTask = (newTaskName: string)=> {
         setTasks([...tasks, { completed: false, title: newTaskName, id: getNextId(tasks), deadline: String(deadline?.valueOf()) }]);
-        setDeadline(undefined);
     }
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -44,7 +44,23 @@ export default function NewTodoItem({ tasks, setTasks }: Props) {
         if (!name.trim()) return;
 
         addTask(name);
+        setDeadline(undefined);
         setName('');
+        nameRef?.current?.focus();
+    }
+
+    const submitRef = useRef<HTMLButtonElement>(null);
+    const submitRefRegistrar = (buttonRef: RefObject<HTMLButtonElement> | null) => {
+        submitRef.current = buttonRef?.current || null;
+    };
+    
+    const focusSubmit = useCallback(() => {
+        submitRef?.current?.focus();
+    }, [submitRef]);
+
+    const handleDeadlineChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        setDeadline(event.target.valueAsDate || undefined);
+        focusSubmit && focusSubmit();
     }
 
     return (
@@ -57,6 +73,7 @@ export default function NewTodoItem({ tasks, setTasks }: Props) {
                     name="name"
                     type="text"
                     value={name}
+                    ref={nameRef}
                     onChange={handleTextChange}
                     placeholder="Add a new task"
                     className={styles.name}
@@ -64,6 +81,7 @@ export default function NewTodoItem({ tasks, setTasks }: Props) {
                 <Button
                     variant="primary"
                     type="submit"
+                    registerButtonRef={submitRefRegistrar}
                     className={[styles.add, styles.button].join(" ")}
                 ><img className={styles.plus} src={plusIcon} alt="+"/>
                 </Button>
@@ -71,7 +89,7 @@ export default function NewTodoItem({ tasks, setTasks }: Props) {
 
             <DeadlinePicker
                 deadline={deadline}
-                setDeadline={setDeadline}
+                handleDeadlineChange={handleDeadlineChange}
             />
         </form>
     );

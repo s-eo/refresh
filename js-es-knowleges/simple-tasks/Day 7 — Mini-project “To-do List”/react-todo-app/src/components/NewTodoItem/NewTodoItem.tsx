@@ -1,4 +1,4 @@
-import React, {useState, useRef, RefObject, useCallback} from "react";
+import React, {useState, useRef, RefObject, useCallback, useContext} from "react";
 
 import {Todo} from "../../types/todo";
 
@@ -7,31 +7,26 @@ import Button from "../UI/Button/Button";
 import styles from './NewTodoItem.module.css';
 import FunctionalityRow from "../FunctionalityRow/FunctionalityRow";
 import DeadlinePicker from "../DeadlinePicker/DeadlinePicker";
+import {TodoDispatchContext} from '../TodoContext/TodoContext';
 
-interface Props {
-    setTasks: (tasks: Todo[]) => void;
-    tasks: Todo[];
-}
 
-const getNextId = (tasks: Todo[]): number => {
-    let maxId = 0;
-    tasks.forEach(task => {
-        if (task.id > maxId) {
-            maxId = task.id;
-        }
-    })
-
-    return ++maxId;
-}
-
-export default function NewTodoItem({ tasks, setTasks }: Props) {
+export default function NewTodoItem() {
     const [name, setName] = useState<string>('');
     const [deadline, setDeadline] = useState<Date | undefined>(undefined);
+
+    const dispatch = useContext(TodoDispatchContext) as Function;
 
     const nameRef = useRef<HTMLInputElement>(null);
 
     const addTask = (newTaskName: string)=> {
-        setTasks([...tasks, { completed: false, title: newTaskName, id: getNextId(tasks), deadline: String(deadline?.valueOf()) }]);
+        dispatch({
+            type: 'added',
+            payload: {
+                completed: false,
+                title: newTaskName,
+                deadline: String(deadline?.valueOf())
+            },
+        });
     }
 
     const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {

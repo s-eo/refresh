@@ -1,19 +1,17 @@
-import React from "react";
+import React, {useContext} from "react";
 
 import Button from "../UI/Button/Button";
-import {Todo} from "../../types/todo";
 
 import styles from "./ClearCompleted.module.css";
+import {TodoDispatchContext} from "../TodoContext/TodoContext";
 
-interface Props {
-    tasks: Array<Todo>;
-    setTasks: (tasks: Array<Todo>) => void;
-}
-
-export default function ClearCompleted({ tasks, setTasks }: Props) {
+export default function ClearCompleted() {
+    const dispatch = useContext(TodoDispatchContext) as Function;
 
     function handleClick() {
-        setTasks(tasks.filter((task) => !task.completed));
+        dispatch({
+            type: "clearCompleted"
+        });
     }
 
     return (

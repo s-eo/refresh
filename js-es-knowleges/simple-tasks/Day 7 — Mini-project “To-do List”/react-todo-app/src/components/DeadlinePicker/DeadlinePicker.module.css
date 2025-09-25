@@ -1,0 +1,23 @@
+.input[type="date"] {
+    background-color: var(--teeny-greeny);
+    border: 1px solid var(--grey-greeny);
+    padding: 8px 12px;
+    font-family: Arial, sans-serif;
+    font-size: 0.9rem;
+    color: #333;
+    border-radius: 4px;
+}
+
+.input[type="date"]:focus {
+    border-color: green;
+}
+
+.input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+}
+
+@media (prefers-color-scheme: dark) {
+    .input[type="date"]::-webkit-calendar-picker-indicator {
+        filter: invert(100%);
+    }
+}

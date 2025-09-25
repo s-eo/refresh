@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <article className="App-content">
-          <Card width="half-window">
+          <Card width="column">
               <header>
                   <h1>To-Do list</h1>
               </header>
@@ -47,7 +47,8 @@ function App() {
                   </Card>
                   <Card>
                       <TodoList
-                          tasks={visibleTasks}
+                          tasks={tasks}
+                          visibleTasks={visibleTasks}
                           setTasks={setTasks}
                       />
                   </Card>

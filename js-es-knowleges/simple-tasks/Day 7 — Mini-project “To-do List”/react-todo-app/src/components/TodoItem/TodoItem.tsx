@@ -1,10 +1,11 @@
-import React from "react";
+import React, {useMemo} from "react";
 
 import type {Todo} from "../../types/todo";
 
-import deleteIcon from "../../assets/close.png";
+import deleteIcon from "../../assets/trash.svg";
 import styles from "./TodoItem.module.css"
 import Button from "../UI/Button/Button";
+import clsx from "clsx";
 
 interface Props {
     todo: Todo;
@@ -13,14 +14,17 @@ interface Props {
 }
 
 export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
-    const { id, completed, title } = todo;
+    const { id, completed, title, deadline: dLTimestamp } = todo;
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => toggleTodo(id);
     const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => deleteTodo(id);
 
+    const deadline = useMemo(() => dLTimestamp ? new Date(+dLTimestamp).toDateString() : '', [dLTimestamp]);
+    const isStale = useMemo(() => dLTimestamp ? +dLTimestamp < Date.now() : false, [dLTimestamp]);
+
     return (
-        <li className={styles.line}>
-            <span>
+        <li className={styles.container}>
+            <span className={styles.main}>
                 <input
                     type="checkbox"
                     checked={completed}
@@ -34,9 +38,13 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
             <Button
                 variant="danger"
                 onClick={handleDelete}
+                className={styles.trash}
             >
                 <img className={styles.img} src={deleteIcon} alt="x"/>
             </Button>
+            {deadline && (<div className={clsx(styles.line, styles.deadline, isStale && styles.stale)}>
+                <span>Until {deadline}</span>
+            </div>)}
         </li>
     );
 }

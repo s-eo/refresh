@@ -1,35 +1,36 @@
-import React from "react";
+import React, {useContext, useMemo} from "react";
 
 import type {Todo} from "../../types/todo";
 
 import TodoItem from "../TodoItem/TodoItem";
+import {TodoContext, TodoDispatchContext} from '../TodoContext/TodoContext';
 
 import styles from './TodoList.module.css';
+import {filterFunction} from "../TodoFilter/TodoFilter";
+import {Filter} from "../../types/filter";
 
 interface Props {
-    tasks: Todo[];
-    visibleTasks: Todo[];
-    setTasks: (tasks: Todo[]) => void;
+    filter: Filter;
 }
 
-export default function TodoList({ visibleTasks, tasks, setTasks }: Props) {
-    const toggleTodo = (id: number) => {
-        const nextTodos = tasks.map(task => {
-            if (task.id === id) {
-                return {
-                    ...task,
-                    completed: !task.completed,
-                }
-            }
+export default function TodoList({ filter }: Props) {
+    const dispatch = useContext(TodoDispatchContext) as Function;
+    const todos: Todo[] = useContext(TodoContext);
 
-            return task;
-        })
+    const visibleTasks = useMemo(() => filterFunction(todos, filter), [todos, filter]);
 
-        setTasks(nextTodos);
+    const handleToggleTodo = (id: number) => {
+        dispatch({
+            type: "toggled",
+            id
+        });
     }
 
-    const deleteTodo = (id: number) => {
-        setTasks(tasks.filter(task => task.id !== id))
+    function handleDeleteTodo(id: number) {
+        dispatch({
+            type: 'deleted',
+            id
+        });
     }
 
     return (
@@ -38,8 +39,8 @@ export default function TodoList({ visibleTasks, tasks, setTasks }: Props) {
                 <TodoItem
                     key={todo.id}
                     todo={todo}
-                    toggleTodo={toggleTodo}
-                    deleteTodo={deleteTodo}
+                    toggleTodo={handleToggleTodo}
+                    deleteTodo={handleDeleteTodo}
                 />
             )) : <span>No more tasks there</span>}
         </ul>

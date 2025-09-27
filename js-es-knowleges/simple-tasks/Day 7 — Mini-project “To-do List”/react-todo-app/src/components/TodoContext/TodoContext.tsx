@@ -1,4 +1,4 @@
-import React, {createContext, useEffect, useReducer} from "react";
+import React, {createContext, useContext, useEffect, useReducer} from "react";
 
 import {Todo} from '../../types/todo';
 import {getNextId} from "./helper";
@@ -7,6 +7,13 @@ import {getTodos, storeTodos} from "../LocalStorage/LocalStorage-helpers";
 export const TodoContext = createContext<Todo[]>([]);
 export const TodoDispatchContext = createContext<Function | null>(null);
 
+export function useTodos() {
+    return useContext(TodoContext);
+}
+
+export function useTodosDispatch() {
+    return useContext(TodoDispatchContext);
+}
 
 const initialTodoState = getTodos();
 

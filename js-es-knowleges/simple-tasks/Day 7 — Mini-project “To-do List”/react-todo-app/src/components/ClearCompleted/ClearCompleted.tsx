@@ -1,12 +1,12 @@
-import React, {useContext} from "react";
+import React from "react";
 
 import Button from "../UI/Button/Button";
 
 import styles from "./ClearCompleted.module.css";
-import {TodoDispatchContext} from "../TodoContext/TodoContext";
+import {useTodosDispatch} from "../TodoContext/TodoContext";
 
 export default function ClearCompleted() {
-    const dispatch = useContext(TodoDispatchContext) as Function;
+    const dispatch = useTodosDispatch() as Function;
 
     function handleClick() {
         dispatch({

@@ -1,20 +1,18 @@
-import React, {useState, useRef, RefObject, useCallback, useContext} from "react";
-
-import {Todo} from "../../types/todo";
+import React, {useState, useRef, RefObject, useCallback} from "react";
 
 import plusIcon from "../../assets/plus.svg";
 import Button from "../UI/Button/Button";
 import styles from './NewTodoItem.module.css';
 import FunctionalityRow from "../FunctionalityRow/FunctionalityRow";
 import DeadlinePicker from "../DeadlinePicker/DeadlinePicker";
-import {TodoDispatchContext} from '../TodoContext/TodoContext';
+import {useTodosDispatch} from '../TodoContext/TodoContext';
 
 
 export default function NewTodoItem() {
     const [name, setName] = useState<string>('');
     const [deadline, setDeadline] = useState<Date | undefined>(undefined);
 
-    const dispatch = useContext(TodoDispatchContext) as Function;
+    const dispatch = useTodosDispatch() as Function;
 
     const nameRef = useRef<HTMLInputElement>(null);
 

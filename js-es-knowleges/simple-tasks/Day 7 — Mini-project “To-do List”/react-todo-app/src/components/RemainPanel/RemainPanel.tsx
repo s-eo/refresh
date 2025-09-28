@@ -19,8 +19,8 @@ const getRemainPhrase = (count: number) => {
 
 export default function RemainPanel() {
     const tasks = useTodos();
-    const count = useMemo(() => tasks
-        .filter(task => !task.completed).length, [tasks]);
+    const count = useMemo(() => tasks ? tasks
+        .filter(task => !task.completed).length : 0, [tasks]);
 
     return (
         <div className={styles.panel}>{getRemainPhrase(count)}</div>

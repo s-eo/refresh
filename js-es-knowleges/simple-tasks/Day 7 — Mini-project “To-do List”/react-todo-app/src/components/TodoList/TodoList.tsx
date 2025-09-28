@@ -1,6 +1,5 @@
 import React, {useMemo} from "react";
 
-import type {Todo} from "../../types/todo";
 
 import TodoItem from "../TodoItem/TodoItem";
 import {useTodos, useTodosDispatch} from '../TodoContext/TodoContext';
@@ -15,7 +14,7 @@ interface Props {
 
 export default function TodoList({ filter }: Props) {
     const dispatch = useTodosDispatch() as Function;
-    const todos: Todo[] = useTodos();
+    const todos = useTodos();
 
     const visibleTasks = useMemo(() => filterFunction(todos, filter), [todos, filter]);
 

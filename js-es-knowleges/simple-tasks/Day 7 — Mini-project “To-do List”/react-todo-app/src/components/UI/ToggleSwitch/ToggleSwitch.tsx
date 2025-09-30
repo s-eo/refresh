@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useMemo} from 'react';
+import clsx from "clsx";
 
 import styles from './ToggleSwitch.module.css';
 
@@ -8,9 +9,10 @@ interface ToggleSwitchProps {
     setChecked: (checked: boolean) => void;
     optionLabels?: [string, string];
     width?: number;
+    isDisabled?: boolean;
 }
 
-function ToggleSwitch({ name, checked, setChecked, optionLabels=["Yes", "No"], width }: ToggleSwitchProps) {
+function ToggleSwitch({ name, checked, setChecked, optionLabels=["Yes", "No"], width, isDisabled=false }: ToggleSwitchProps) {
     const handleToggleSwitch = (event: ChangeEvent<HTMLInputElement>) => setChecked(event.target.checked);
     const containerWidth = useMemo(() => (width ? width + 'px' : 'initial'), [width]);
 
@@ -23,9 +25,10 @@ function ToggleSwitch({ name, checked, setChecked, optionLabels=["Yes", "No"], w
                 id={name}
                 checked={checked}
                 onChange={handleToggleSwitch}
+                disabled={isDisabled}
             />
             <label
-                className={styles.label}
+                className={clsx(styles.label, isDisabled && styles.disabled)}
                 htmlFor={name}
             >
                 <span className={styles.inner}

@@ -1,12 +1,13 @@
-import React, {useMemo} from "react";
+import React, {useContext, useMemo} from "react";
 
 
 import TodoItem from "../TodoItem/TodoItem";
-import {useTodos, useTodosDispatch} from '../TodoContext/TodoContext';
+import {IsReadyTodoContext, useTodos, useTodosDispatch} from '../TodoContext/TodoContext';
 
 import styles from './TodoList.module.css';
 import {filterFunction} from "../TodoFilter/TodoFilter";
 import {Filter} from "../../types/filter";
+import Loading from "../Loading/Loading";
 
 interface Props {
     filter: Filter;
@@ -15,6 +16,7 @@ interface Props {
 export default function TodoList({ filter }: Props) {
     const dispatch = useTodosDispatch() as Function;
     const todos = useTodos();
+    const isReadyTodos = useContext(IsReadyTodoContext);
 
     const visibleTasks = useMemo(() => filterFunction(todos, filter), [todos, filter]);
 
@@ -33,7 +35,7 @@ export default function TodoList({ filter }: Props) {
     }
 
     return (
-        <ul className={styles.list}>
+        isReadyTodos ? (<ul className={styles.list}>
             {visibleTasks.length ? visibleTasks.map(todo => (
                 <TodoItem
                     key={todo.id}
@@ -42,6 +44,6 @@ export default function TodoList({ filter }: Props) {
                     deleteTodo={handleDeleteTodo}
                 />
             )) : <span>No more tasks there</span>}
-        </ul>
+        </ul>) : <Loading />
     );
 }

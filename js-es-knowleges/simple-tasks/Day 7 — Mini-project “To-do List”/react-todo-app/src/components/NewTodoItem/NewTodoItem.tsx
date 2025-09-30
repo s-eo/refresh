@@ -1,16 +1,18 @@
-import React, {useState, useRef, RefObject, useCallback} from "react";
+import React, {useState, useRef, RefObject, useCallback, useContext} from "react";
 
 import plusIcon from "../../assets/plus.svg";
 import Button from "../UI/Button/Button";
 import styles from './NewTodoItem.module.css';
 import FunctionalityRow from "../FunctionalityRow/FunctionalityRow";
 import DeadlinePicker from "../DeadlinePicker/DeadlinePicker";
-import {useTodosDispatch} from '../TodoContext/TodoContext';
+import {IsReadyTodoContext, useTodosDispatch} from '../TodoContext/TodoContext';
+import clsx from "clsx";
 
 
 export default function NewTodoItem() {
     const [name, setName] = useState<string>('');
     const [deadline, setDeadline] = useState<Date | undefined>(undefined);
+    const isDisabled = !useContext(IsReadyTodoContext);
 
     const dispatch = useTodosDispatch() as Function;
 
@@ -70,10 +72,12 @@ export default function NewTodoItem() {
                     onChange={handleTextChange}
                     placeholder="Add a new task"
                     className={styles.name}
+                    disabled={isDisabled}
                 />
                 <Button
                     variant="primary"
                     type="submit"
+                    disabled={isDisabled}
                     registerButtonRef={submitRefRegistrar}
                     className={[styles.add, styles.button].join(" ")}
                 ><img className={styles.plus} src={plusIcon} alt="+"/>
@@ -83,6 +87,7 @@ export default function NewTodoItem() {
             <DeadlinePicker
                 deadline={deadline}
                 handleDeadlineChange={handleDeadlineChange}
+                isDisabled={isDisabled}
             />
         </form>
     );

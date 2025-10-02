@@ -5,14 +5,13 @@ import Button from "../UI/Button/Button";
 import styles from './NewTodoItem.module.css';
 import FunctionalityRow from "../FunctionalityRow/FunctionalityRow";
 import DeadlinePicker from "../DeadlinePicker/DeadlinePicker";
-import {IsReadyTodoContext, useTodosDispatch} from '../TodoContext/TodoContext';
-import clsx from "clsx";
+import {FetchTodoContext, useTodosDispatch} from '../TodoContext/TodoContext';
 
 
 export default function NewTodoItem() {
     const [name, setName] = useState<string>('');
     const [deadline, setDeadline] = useState<Date | undefined>(undefined);
-    const isDisabled = !useContext(IsReadyTodoContext);
+    const isDisabled = useContext(FetchTodoContext) == 'pending';
 
     const dispatch = useTodosDispatch() as Function;
 

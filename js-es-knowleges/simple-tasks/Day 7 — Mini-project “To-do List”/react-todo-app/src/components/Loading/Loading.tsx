@@ -1,14 +1,16 @@
 import React from 'react';
-import {LOADER_TIME} from "../TodoContext/predefinedTodos";
 
-const time = Math.round(LOADER_TIME / 1000);
+import Card from "../Card/Card";
 
-export default function Loading() {
+interface Props {
+    children?: React.ReactNode;
+}
+
+export default function Loading({ children }: Props) {
     return (
-        <article>
+        <Card>
             <h2>🌀 Loading...</h2>
-            <p>Loading task examples.</p>
-            <p>Please wait {time} seconds minimum and watch this loader.</p>
-        </article>
+            {children}
+        </Card>
     );
 }

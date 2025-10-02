@@ -3,13 +3,14 @@ import React, {createContext, useContext, useEffect, useReducer} from "react";
 import {Todo} from '../../types/todo';
 import {storeTodos} from "../LocalStorage/LocalStorage";
 import {usePredefinedTodos} from "./predefinedTodos";
-import {todoReducer} from "./todoReducer";
+import {fetchTodoReducer, todoReducers} from "./todoReducers";
+import {FetchState} from "../../types/fetch";
 
 export const TodoContext = createContext<Todo[] | undefined>(undefined);
 export const TodoDispatchContext = createContext<Function | null>(null);
 
-export const IsReadyTodoContext = createContext<boolean>(false);
-export const IsReadyTodoDispatchContext = createContext<Function | null>(null);
+export const FetchTodoContext = createContext<FetchState>('pending');
+export const FetchTodoDispatchContext = createContext<Function | null>(null);
 
 export function useTodos() {
     return useContext(TodoContext);
@@ -24,11 +25,11 @@ interface Props {
 }
 
 export const TodoProvider = ({children}: Props) => {
-    const [todos, dispatch] = useReducer(todoReducer, undefined);
-    const [isReadyTodos, dispatchIsReadyTodos] = useReducer(() => true, false);
+    const [todos, dispatch] = useReducer(todoReducers, undefined);
+    const [fetchTodosState, dispatchFetchTodosState] = useReducer(fetchTodoReducer, 'pending');
 
     // set initial todos async
-    usePredefinedTodos({dispatch, dispatchIsReadyTodos});
+    usePredefinedTodos({dispatch, dispatchFetchTodosState});
 
     // save all changes to Local Storage
     useEffect(() => {
@@ -36,14 +37,14 @@ export const TodoProvider = ({children}: Props) => {
     }, [todos]);
 
     return (
-        <IsReadyTodoContext value={isReadyTodos}>
-            <IsReadyTodoDispatchContext value={dispatchIsReadyTodos}>
+        <FetchTodoContext value={fetchTodosState}>
+            <FetchTodoDispatchContext value={dispatchFetchTodosState}>
                 <TodoContext value={todos}>
                     <TodoDispatchContext value={dispatch}>
                         {children}
                     </TodoDispatchContext>
                 </TodoContext>
-            </IsReadyTodoDispatchContext>
-        </IsReadyTodoContext>
+            </FetchTodoDispatchContext>
+        </FetchTodoContext>
     );
 }

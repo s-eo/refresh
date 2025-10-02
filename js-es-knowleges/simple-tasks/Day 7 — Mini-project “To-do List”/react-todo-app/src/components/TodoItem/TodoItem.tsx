@@ -1,11 +1,11 @@
 import React, {useMemo} from "react";
+import clsx from "clsx";
 
 import type {Todo} from "../../types/todo";
 
 import deleteIcon from "../../assets/trash.svg";
 import styles from "./TodoItem.module.css"
 import Button from "../UI/Button/Button";
-import clsx from "clsx";
 
 interface Props {
     todo: Todo;

@@ -1,1 +1,1 @@
-export type FetchState = 'pending' | 'completed' | 'error';
+export type FetchState = 'initial' | 'pending' | 'completed' | 'error';

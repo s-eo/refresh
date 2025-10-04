@@ -53,6 +53,9 @@ export const todoReducers = (prevState: Todo[] | undefined, action: any): Todo[]
 export const fetchTodoReducer = (prevState: FetchState, action: any): FetchState => {
     if (action?.type) {
         switch (action.type) {
+            case 'onLoad':
+                return 'pending';
+
             case 'onError':
                 return 'error';
 

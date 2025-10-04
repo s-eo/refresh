@@ -26,7 +26,7 @@ interface Props {
 
 export const TodoProvider = ({children}: Props) => {
     const [todos, dispatch] = useReducer(todoReducers, undefined);
-    const [fetchTodosState, dispatchFetchTodosState] = useReducer(fetchTodoReducer, 'pending');
+    const [fetchTodosState, dispatchFetchTodosState] = useReducer(fetchTodoReducer, 'initial');
 
     // set initial todos async
     usePredefinedTodos({dispatch, dispatchFetchTodosState});

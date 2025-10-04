@@ -18,12 +18,15 @@
     font-size: 14px;
     font-weight: 500;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.25);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     color: #fff;
 
     animation: slideIn 0.3s ease-out;
+}
+
+.notificationText {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* Error (Red) */
@@ -66,4 +69,11 @@
         transform: translateX(0);
         opacity: 1;
     }
+}
+
+.notificationActions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 1em;
 }

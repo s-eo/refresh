@@ -11,7 +11,7 @@ import {FetchTodoContext, useTodosDispatch} from '../TodoContext/TodoContext';
 export default function NewTodoItem() {
     const [name, setName] = useState<string>('');
     const [deadline, setDeadline] = useState<Date | undefined>(undefined);
-    const isDisabled = useContext(FetchTodoContext) == 'pending';
+    const isDisabled = useContext(FetchTodoContext) === 'pending';
 
     const dispatch = useTodosDispatch() as Function;
 

@@ -1,4 +1,4 @@
-import React, {ButtonHTMLAttributes, RefObject, useCallback, useEffect, useRef} from "react";
+import React, {ButtonHTMLAttributes, RefObject, useEffect, useRef} from "react";
 import clsx from "clsx";
 
 import styles from "./Button.module.css";
@@ -19,7 +19,7 @@ export default function Button({ variant = "primary", className, registerButtonR
             // @ts-ignore
             registerButtonRef(submitRef);
         }
-    }, [submitRef]);
+    }, [submitRef, registerButtonRef]);
 
     return (
         <button

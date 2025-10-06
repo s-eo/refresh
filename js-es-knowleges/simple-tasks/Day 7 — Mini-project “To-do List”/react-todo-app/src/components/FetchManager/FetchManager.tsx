@@ -80,7 +80,7 @@ export default function FetchManager({children}: Props):JSX.Element {
     const dispatch = useTodosDispatch();
 
     const refetchManager = useMemo(() => setTodosManagerCreator(dispatch, fetchStateDispatch),
-        [setTodosManagerCreator, dispatch, fetchStateDispatch]);
+        [dispatch, fetchStateDispatch]);
     const handleRefetchClick: MouseEventHandler = useCallback(() => refetchManager(), [refetchManager]);
 
 

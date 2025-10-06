@@ -3,10 +3,11 @@ import React, {useContext} from "react";
 import Button from "../UI/Button/Button";
 
 import styles from "./ClearCompleted.module.css";
-import {TodoDispatchContext} from "../TodoContext/TodoContext";
+import {FetchTodoContext, useTodosDispatch} from "../TodoContext/TodoContext";
 
 export default function ClearCompleted() {
-    const dispatch = useContext(TodoDispatchContext) as Function;
+    const dispatch = useTodosDispatch() as Function;
+    const isDisabled = useContext(FetchTodoContext) === 'pending';
 
     function handleClick() {
         dispatch({
@@ -20,6 +21,7 @@ export default function ClearCompleted() {
                 variant='danger'
                 onClick={handleClick}
                 className={styles.clear}
+                disabled={isDisabled}
             >Clear completed</Button>
         </div>
     );

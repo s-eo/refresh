@@ -1,20 +1,19 @@
 import React, {useState, useRef, RefObject, useCallback, useContext} from "react";
 
-import {Todo} from "../../types/todo";
-
 import plusIcon from "../../assets/plus.svg";
 import Button from "../UI/Button/Button";
 import styles from './NewTodoItem.module.css';
 import FunctionalityRow from "../FunctionalityRow/FunctionalityRow";
 import DeadlinePicker from "../DeadlinePicker/DeadlinePicker";
-import {TodoDispatchContext} from '../TodoContext/TodoContext';
+import {FetchTodoContext, useTodosDispatch} from '../TodoContext/TodoContext';
 
 
 export default function NewTodoItem() {
     const [name, setName] = useState<string>('');
     const [deadline, setDeadline] = useState<Date | undefined>(undefined);
+    const isDisabled = useContext(FetchTodoContext) == 'pending';
 
-    const dispatch = useContext(TodoDispatchContext) as Function;
+    const dispatch = useTodosDispatch() as Function;
 
     const nameRef = useRef<HTMLInputElement>(null);
 
@@ -72,10 +71,12 @@ export default function NewTodoItem() {
                     onChange={handleTextChange}
                     placeholder="Add a new task"
                     className={styles.name}
+                    disabled={isDisabled}
                 />
                 <Button
                     variant="primary"
                     type="submit"
+                    disabled={isDisabled}
                     registerButtonRef={submitRefRegistrar}
                     className={[styles.add, styles.button].join(" ")}
                 ><img className={styles.plus} src={plusIcon} alt="+"/>
@@ -85,6 +86,7 @@ export default function NewTodoItem() {
             <DeadlinePicker
                 deadline={deadline}
                 handleDeadlineChange={handleDeadlineChange}
+                isDisabled={isDisabled}
             />
         </form>
     );

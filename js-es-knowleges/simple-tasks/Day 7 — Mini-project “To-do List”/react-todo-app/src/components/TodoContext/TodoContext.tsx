@@ -1,54 +1,23 @@
-import React, {createContext, useEffect, useReducer} from "react";
+import React, {createContext, useContext, useEffect, useReducer} from "react";
 
 import {Todo} from '../../types/todo';
-import {getNextId} from "./helper";
-import {getTodos, storeTodos} from "../LocalStorage/LocalStorage-helpers";
+import {storeTodos} from "../LocalStorage/LocalStorage";
+import {usePredefinedTodos} from "./predefinedTodos";
+import {fetchTodoReducer, todoReducers} from "./todoReducers";
+import {FetchState} from "../../types/fetch";
 
-export const TodoContext = createContext<Todo[]>([]);
+export const TodoContext = createContext<Todo[] | undefined>(undefined);
 export const TodoDispatchContext = createContext<Function | null>(null);
 
+export const FetchTodoContext = createContext<FetchState>('pending');
+export const FetchTodoDispatchContext = createContext<Function | null>(null);
 
-const initialTodoState = getTodos();
+export function useTodos() {
+    return useContext(TodoContext);
+}
 
-const todoReducer = (prevState: Todo[], action: any): Todo[] => {
-    if (action?.type) {
-        switch (action.type) {
-            case 'deleted':
-                return prevState.filter(todo => todo.id !== action.id)
-
-
-            case 'toggled':
-                return prevState.map(task => {
-                    if (task.id === action?.id) {
-                        return {
-                            ...task,
-                            completed: !task.completed,
-                        }
-                    }
-
-                    return task;
-                });
-
-            case 'added':
-                return [
-                    ...prevState,
-                    {
-                        ...action.payload,
-                        id: getNextId(prevState)
-                    }
-                ];
-
-            case 'clearCompleted':
-                return prevState.filter((todo) => !todo.completed);
-
-            default:
-                console.error('Unknown action in tasks reducer');
-                return prevState;
-        }
-    }
-
-    console.error('Action is not found in tasks reducer');
-    return prevState;
+export function useTodosDispatch() {
+    return useContext(TodoDispatchContext);
 }
 
 interface Props {
@@ -56,18 +25,26 @@ interface Props {
 }
 
 export const TodoProvider = ({children}: Props) => {
-    const [todos, dispatch] = useReducer(todoReducer, initialTodoState);
+    const [todos, dispatch] = useReducer(todoReducers, undefined);
+    const [fetchTodosState, dispatchFetchTodosState] = useReducer(fetchTodoReducer, 'initial');
+
+    // set initial todos async
+    usePredefinedTodos({dispatch, dispatchFetchTodosState});
 
     // save all changes to Local Storage
     useEffect(() => {
-        storeTodos(todos);
+        todos && storeTodos(todos);
     }, [todos]);
 
     return (
-        <TodoContext value={todos}>
-            <TodoDispatchContext value={dispatch}>
-                {children}
-            </TodoDispatchContext>
-        </TodoContext>
+        <FetchTodoContext value={fetchTodosState}>
+            <FetchTodoDispatchContext value={dispatchFetchTodosState}>
+                <TodoContext value={todos}>
+                    <TodoDispatchContext value={dispatch}>
+                        {children}
+                    </TodoDispatchContext>
+                </TodoContext>
+            </FetchTodoDispatchContext>
+        </FetchTodoContext>
     );
 }

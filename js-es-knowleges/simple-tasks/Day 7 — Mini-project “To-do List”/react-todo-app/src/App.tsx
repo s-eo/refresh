@@ -10,6 +10,7 @@ import ClearCompleted from "./components/ClearCompleted/ClearCompleted";
 import TodoFilter from "./components/TodoFilter/TodoFilter";
 import FunctionalityRow from "./components/FunctionalityRow/FunctionalityRow";
 import RemainPanel from "./components/RemainPanel/RemainPanel";
+import FetchManager from "./components/FetchManager/FetchManager";
 
 import './App.css';
 
@@ -34,7 +35,9 @@ function App() {
                      </FunctionalityRow>
                  </Card>
                  <Card>
-                     <TodoList filter={filter} />
+                     <FetchManager>
+                         <TodoList filter={filter} />
+                     </FetchManager>
                  </Card>
              </TodoProvider>
           </Card>

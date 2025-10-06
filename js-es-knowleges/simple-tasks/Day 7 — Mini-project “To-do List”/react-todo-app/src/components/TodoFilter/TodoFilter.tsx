@@ -13,7 +13,11 @@ interface TodoFilterProps {
 }
 
 const filters: Array<Filter> = ['all', 'active', 'completed'];
-export const filterFunction = (tasks: Array<Todo>, filter: Filter): Array<Todo> => {
+export const filterFunction = (tasks: Array<Todo> | undefined, filter: Filter): Array<Todo> => {
+
+    if (!Array.isArray(tasks)) {
+        return [];
+    }
 
     switch (filter) {
         case 'active':

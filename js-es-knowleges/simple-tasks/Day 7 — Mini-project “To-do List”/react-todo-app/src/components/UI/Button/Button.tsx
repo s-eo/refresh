@@ -3,9 +3,9 @@ import clsx from "clsx";
 
 import styles from "./Button.module.css";
 
-type Variant = "primary" | "danger" | "outline" | "image";
+type Variant = "primary" | "danger" | "outline" | "notification";
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: Variant;
     registerButtonRef?: (ref: RefObject<HTMLButtonElement> | null) => void;
 }

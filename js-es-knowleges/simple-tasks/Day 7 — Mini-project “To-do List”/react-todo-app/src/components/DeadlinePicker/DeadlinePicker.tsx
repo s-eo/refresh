@@ -9,9 +9,10 @@ import styles from './DeadlinePicker.module.css';
 interface DeadlinePickerProps {
     deadline?: Date;
     handleDeadlineChange: ChangeEventHandler<HTMLInputElement>;
+    isDisabled?: boolean;
 }
 
-export default function DeadlinePicker({ deadline, handleDeadlineChange }: DeadlinePickerProps) {
+export default function DeadlinePicker({ deadline, handleDeadlineChange, isDisabled = false }: DeadlinePickerProps) {
     const [hasDeadline, setHasDeadline] = useState(false);
 
     const deadlineInput = useMemo<string | undefined>(() => getInputDate(deadline), [deadline])
@@ -23,6 +24,7 @@ export default function DeadlinePicker({ deadline, handleDeadlineChange }: Deadl
                 value={deadlineInput}
                 onChange={handleDeadlineChange}
                 className={styles.input}
+                disabled={isDisabled}
             />}
             <ToggleSwitch
                 name="dealinePicker"
@@ -30,6 +32,7 @@ export default function DeadlinePicker({ deadline, handleDeadlineChange }: Deadl
                 setChecked={setHasDeadline}
                 optionLabels={["Has deadline", "No deadline"]}
                 width={100}
+                isDisabled={isDisabled}
             />
         </FunctionalityRow>
     );

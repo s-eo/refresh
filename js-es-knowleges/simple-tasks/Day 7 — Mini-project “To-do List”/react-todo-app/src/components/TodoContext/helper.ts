@@ -10,3 +10,5 @@ export const getNextId = (tasks: Todo[]): number => {
 
     return ++maxId;
 }
+
+export const promisifiedTimeout = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));

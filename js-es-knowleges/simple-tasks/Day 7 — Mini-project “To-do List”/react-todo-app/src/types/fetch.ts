@@ -1,0 +1,1 @@
+export type FetchState = 'initial' | 'pending' | 'completed' | 'error';

@@ -1,7 +1,7 @@
-import React, {useContext, useMemo} from "react";
+import React, {useMemo} from "react";
 
 import styles from './RemainPanel.module.css';
-import {TodoContext} from "../TodoContext/TodoContext";
+import {useTodos} from "../TodoContext/TodoContext";
 
 const REMAIN_PHRASES = ["unsolved task", "remain"];
 const NO_REMAIN_PHRASE = ""; // "No unsolved tasks remain";
@@ -18,9 +18,9 @@ const getRemainPhrase = (count: number) => {
 }
 
 export default function RemainPanel() {
-    const tasks = useContext(TodoContext);
-    const count = useMemo(() => tasks
-        .filter(task => !task.completed).length, [tasks]);
+    const tasks = useTodos();
+    const count = useMemo(() => tasks ? tasks
+        .filter(task => !task.completed).length : 0, [tasks]);
 
     return (
         <div className={styles.panel}>{getRemainPhrase(count)}</div>

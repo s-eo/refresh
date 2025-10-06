@@ -1,4 +1,4 @@
-import React, {JSX, ReactNode, useCallback, useContext} from 'react';
+import React, {JSX, MouseEventHandler, ReactNode, useCallback, useContext, useMemo} from 'react';
 
 import {FetchTodoContext, FetchTodoDispatchContext, useTodosDispatch} from "../TodoContext/TodoContext";
 import Loading from "../Loading/Loading";
@@ -8,7 +8,7 @@ import {promisifiedTimeout} from "../TodoContext/helper";
 import Button from "../UI/Button/Button";
 
 const TASKS_URL = 'https://jsonplaceholder.typicode.com/todos';
-const LOADER_TIME = 4000; //ms
+const LOADER_TIME = 1000; //ms
 const time = Math.round(LOADER_TIME / 1000);
 
 export const fetchTasks = async (): Promise<Todo[]> => new Promise(async (resolve, reject) => {
@@ -27,14 +27,19 @@ export const fetchTasks = async (): Promise<Todo[]> => new Promise(async (resolv
         reject();
     }
 });
-export const longFetch: () => Promise<Todo[]> = async () => {
-    const longFetchResult = await Promise.all([fetchTasks(), promisifiedTimeout(LOADER_TIME)
-       // , Promise.reject()
-    ]);
+export const longFetch: (needError?: boolean) => Promise<Todo[]> = async (needError = false) => {
+    if (needError) {
+       return Promise.reject('Just want to let you see the error handling on page load and from notification bar');
+   }
+
+    const longFetchResult = await Promise.all([fetchTasks(), promisifiedTimeout(LOADER_TIME)]);
     return longFetchResult[0];
 }
 
 export function setTodosManagerCreator(dispatch: Function | null, dispatchFetchTodosState: Function | null): (initial?: Todo[] | null) => void {
+    // first error in this manager: one should be in the todos list and one in the refetch handler
+    let isFirstErrorSent = false;
+
     const onSuccess = (payload: Todo[]) => {
         dispatch && dispatch({
             type: 'set',
@@ -49,16 +54,16 @@ export function setTodosManagerCreator(dispatch: Function | null, dispatchFetchT
             onSuccess(initial);
         } else {
             dispatchFetchTodosState && dispatchFetchTodosState({ type: 'onLoad' });
-            // we should see a loader
-            await promisifiedTimeout(LOADER_TIME);
 
-            const result: Promise<Todo[]> = longFetch();
+            const isErrorNeeded = !isFirstErrorSent;
+            isFirstErrorSent = true;
 
-            result
+            longFetch(isErrorNeeded)
                 .then(payload => {
                     onSuccess(payload);
                 })
-                .catch(() => {
+                .catch((error) => {
+                    console.error(error);
                     dispatchFetchTodosState && dispatchFetchTodosState({ type: 'onError' });
                 });
         }
@@ -74,9 +79,9 @@ export default function FetchManager({children}: Props):JSX.Element {
     const fetchStateDispatch = useContext(FetchTodoDispatchContext);
     const dispatch = useTodosDispatch();
 
-    const refetchManager = setTodosManagerCreator(dispatch, fetchStateDispatch);
-    // @ts-ignore
-    const handleRefetchClick = (event: MouseEventHandler<HTMLButtonElement>) => refetchManager();
+    const refetchManager = useMemo(() => setTodosManagerCreator(dispatch, fetchStateDispatch),
+        [setTodosManagerCreator, dispatch, fetchStateDispatch]);
+    const handleRefetchClick: MouseEventHandler = useCallback(() => refetchManager(), [refetchManager]);
 
 
     const [toShowError, setToShowError] = React.useState(true);

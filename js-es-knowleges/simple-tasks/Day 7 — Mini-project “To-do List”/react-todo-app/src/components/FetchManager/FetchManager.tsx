@@ -1,4 +1,4 @@
-import React, {JSX, MouseEventHandler, ReactNode, useCallback, useContext, useMemo} from 'react';
+import React, {JSX, MouseEventHandler, ReactNode, useCallback, useContext, useMemo, useState} from 'react';
 
 import {FetchTodoContext, FetchTodoDispatchContext, useTodosDispatch} from "../TodoContext/TodoContext";
 import Loading from "../Loading/Loading";
@@ -10,6 +10,7 @@ import Button from "../UI/Button/Button";
 const TASKS_URL = 'https://jsonplaceholder.typicode.com/todos';
 const LOADER_TIME = 1000; //ms
 const time = Math.round(LOADER_TIME / 1000);
+const DEFAULT_ERROR = 'Can`t fetch example tasks';
 
 export const fetchTasks = async (): Promise<Todo[]> => new Promise(async (resolve, reject) => {
     try {
@@ -36,7 +37,8 @@ export const longFetch: (needError?: boolean) => Promise<Todo[]> = async (needEr
     return longFetchResult[0];
 }
 
-export function setTodosManagerCreator(dispatch: Function | null, dispatchFetchTodosState: Function | null): (initial?: Todo[] | null) => void {
+export function setTodosManagerCreator(dispatch: Function | null, dispatchFetchTodosState: Function | null, setErrorText?: Function):
+    (initial?: Todo[] | null) => void {
     // first error in this manager: one should be in the todos list and one in the refetch handler
     let isFirstErrorSent = false;
 
@@ -65,6 +67,7 @@ export function setTodosManagerCreator(dispatch: Function | null, dispatchFetchT
                 .catch((error) => {
                     console.error(error);
                     dispatchFetchTodosState && dispatchFetchTodosState({ type: 'onError' });
+                    setErrorText && setErrorText(error.message);
                 });
         }
     }
@@ -79,13 +82,19 @@ export default function FetchManager({children}: Props):JSX.Element {
     const fetchStateDispatch = useContext(FetchTodoDispatchContext);
     const dispatch = useTodosDispatch();
 
-    const refetchManager = useMemo(() => setTodosManagerCreator(dispatch, fetchStateDispatch),
-        [dispatch, fetchStateDispatch]);
-    const handleRefetchClick: MouseEventHandler = useCallback(() => refetchManager(), [refetchManager]);
-
 
     const [toShowError, setToShowError] = React.useState(true);
-    const hideError = useCallback(() => setToShowError(false), [setToShowError]);
+    const [errorText, setErrorText] = useState(DEFAULT_ERROR);
+    const hideError = useCallback(() => {
+        setToShowError(false);
+        setErrorText(DEFAULT_ERROR);
+    }, [setToShowError, setErrorText]);
+
+    const setRefetchError = (message: string) =>
+        setErrorText('Error from notification bar. Next attempt should be successfull');
+    const refetchManager = useMemo(() => setTodosManagerCreator(dispatch, fetchStateDispatch, setRefetchError),
+        [dispatch, fetchStateDispatch]);
+    const handleRefetchClick: MouseEventHandler = useCallback(() => refetchManager(), [refetchManager]);
 
     switch(fetchState) {
         case 'pending':
@@ -99,7 +108,7 @@ export default function FetchManager({children}: Props):JSX.Element {
                 <>
                     {toShowError && <NotificationBox
                         type="error"
-                        message="Can`t fetch example tasks"
+                        message={errorText}
                         onClose={hideError}
                     >
                         <Button

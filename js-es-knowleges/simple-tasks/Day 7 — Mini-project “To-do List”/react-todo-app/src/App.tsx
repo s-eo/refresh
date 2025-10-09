@@ -20,28 +20,28 @@ function App() {
 
     return (
     <div className="App">
-      <article className="App-content">
-          <Card width="column">
-              <header>
-                  <h1 className='title'>To-Do list</h1>
-              </header>
-             <TodoProvider>
-                 <Card>
-                     <NewTodoItem />
-                     <TodoFilter filter={filter} setFilter={setFilter}/>
-                     <FunctionalityRow>
-                         <RemainPanel />
-                         <ClearCompleted />
-                     </FunctionalityRow>
-                 </Card>
-                 <Card>
-                     <FetchManager>
-                         <TodoList filter={filter} />
-                     </FetchManager>
-                 </Card>
-             </TodoProvider>
-          </Card>
-      </article>
+      <Card visible className="App-content">
+          <header>
+              <h1 className='title'>To-Do list</h1>
+          </header>
+         <TodoProvider>
+             <Card>
+                 <NewTodoItem />
+                 <TodoFilter filter={filter} setFilter={setFilter}/>
+                 <FunctionalityRow>
+                     <RemainPanel />
+                 </FunctionalityRow>
+             </Card>
+             <Card className="shrinkable">
+                 <FetchManager>
+                     <TodoList filter={filter} />
+                 </FetchManager>
+             </Card>
+             <Card>
+                 <ClearCompleted />
+             </Card>
+         </TodoProvider>
+      </Card>
     </div>
   );
 }

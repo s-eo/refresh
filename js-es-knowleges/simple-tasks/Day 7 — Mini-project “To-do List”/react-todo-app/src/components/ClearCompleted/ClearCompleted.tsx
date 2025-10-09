@@ -16,13 +16,11 @@ export default function ClearCompleted() {
     }
 
     return (
-        <div className={styles.container}>
             <Button
-                variant='danger'
+                variant='secondary'
                 onClick={handleClick}
                 className={styles.clear}
                 disabled={isDisabled}
             >Clear completed</Button>
-        </div>
     );
 }

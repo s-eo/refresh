@@ -1,23 +1,24 @@
-.input[type="date"] {
-    background-color: var(--teeny-greeny);
-    border: 1px solid var(--grey-greeny);
+.input {
+    background-color: var(--primary-light);
+    border: 1px solid var(--border);
     padding: 8px 12px;
     font-family: Arial, sans-serif;
     font-size: 0.9rem;
     color: #333;
     border-radius: 4px;
+    margin-top: 0.75rem;
 }
 
-.input[type="date"]:focus {
-    border-color: green;
+.input:focus {
+    border-color: var(--primary);
 }
 
-.input[type="date"]::-webkit-calendar-picker-indicator {
+.input::-webkit-calendar-picker-indicator {
     cursor: pointer;
 }
 
 @media (prefers-color-scheme: dark) {
-    .input[type="date"]::-webkit-calendar-picker-indicator {
+    .input::-webkit-calendar-picker-indicator {
         filter: invert(100%);
     }
 }

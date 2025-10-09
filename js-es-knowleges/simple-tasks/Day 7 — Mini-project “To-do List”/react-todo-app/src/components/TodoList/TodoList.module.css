@@ -1,6 +1,10 @@
 .list {
-    /*padding: 0;*/
-
+    max-height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 0;
+    margin: 0;
+    border: 1px solid var(--border);
     display: flex;
     flex-direction: column;
     gap: 0.5rem;

@@ -1,9 +1,14 @@
-.container {
-    display: flex;
-    justify-content: end;
+.clear {
+    font-size: 1rem;
+    padding: 12px 28px;
+    margin: 0;
+    flex: 1;
 }
 
-.clear {
-    font-size: 0.9rem;
-    padding: 0.4rem 0.8rem;
+.clear:hover:not(:disabled) {
+    transform: translateY(-1px);
+}
+
+.clear:active:not(:disabled) {
+    transform: translateY(0);
 }

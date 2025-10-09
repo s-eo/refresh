@@ -3,14 +3,15 @@ import clsx from "clsx";
 
 import styles from "./Button.module.css";
 
-type Variant = "primary" | "danger" | "outline" | "notification";
+type Variant = "primary" | "secondary" | "danger" | "outline" | "notification" | "grouped";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: Variant;
+    active?: boolean;
     registerButtonRef?: (ref: RefObject<HTMLButtonElement> | null) => void;
 }
 
-export default function Button({ variant = "primary", className, registerButtonRef, ...props }: ButtonProps) {
+export default function Button({ variant = "primary", active = false, className, registerButtonRef, ...props }: ButtonProps) {
 
     const submitRef = useRef<HTMLButtonElement>(null);
 
@@ -23,7 +24,9 @@ export default function Button({ variant = "primary", className, registerButtonR
 
     return (
         <button
-            className={clsx(styles.button, styles[variant], className)}
+            className={clsx(styles.button, styles[variant], className, {
+                [styles.active]: active,
+            })}
             ref={submitRef}
             {...props}
         />

@@ -1,28 +1,52 @@
+/*.container {*/
+/*    display: flex;*/
+/*    flex-wrap: wrap;*/
+/*    gap: 0.5rem;*/
+/*    margin: 1em 0 0;*/
+/*    justify-content: center;*/
+/*    border-radius: 5px;*/
+/*    border: 1px solid green;*/
+/*    padding: 0.5em 1em;*/
+/*}*/
+
+/*@media (min-width: 480px) {*/
+/*    .container {*/
+/*        justify-content: start;*/
+
+/*    }*/
+/*}*/
+
 .container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1em 0 0;
-    justify-content: center;
-    border-radius: 5px;
-    border: 1px solid green;
-    padding: 0.5em 1em;
-}
-
-@media (min-width: 480px) {
-    .container {
-        justify-content: start;
-
-    }
+    justify-content: space-between;
+    background-color: #f3f4f6;
+    border-radius: var(--radius);
+    padding: 0.3rem;
 }
 
 .button {
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.9rem;
-    margin: 0;
+    flex: 1;
+    padding: 0.5rem;
+    border: none;
+    background: transparent;
+    border-radius: var(--radius);
+    color: var(--text);
+    font-weight: 500;
+/*    cursor: pointer;*/
+/*    transition: all 0.2s ease;*/
+/*    font-size: 0.9rem;*/
+/*    margin: 0;*/
 }
 
-.button ~ .button {
-    margin-left: 0.5rem;
+/*.button ~ .button {*/
+/*    margin-left: 0.5rem;*/
+/*}*/
+
+.button:hover:not(.active) {
+    background-color: #e5e7eb;
+}
+
+.active {
+    background-color: var(--primary);
+    color: white;
 }

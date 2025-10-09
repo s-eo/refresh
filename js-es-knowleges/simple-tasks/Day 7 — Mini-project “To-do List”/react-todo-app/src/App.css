@@ -1,20 +1,33 @@
-.App {
+.title {
   text-align: center;
+  color: var(--primary);
+  font-weight: 700;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
 }
+
+/*.App {*/
+/*  text-align: center;*/
+/*}*/
 
 .App-content {
-  user-select: none;
-  background-color: var(--pinky);
-  color: var(--dark-grey);
-  min-height: 100vh;
+  background: linear-gradient(180deg, #f9fafb, #eaf3f1);
+  font-family: 'Inter', sans-serif;
+  color: var(--text);
+  margin: 0;
+  padding: 2rem;
+/*  user-select: none;*/
+/*  background-color: var(--pinky);*/
+/*  color: var(--dark-grey);*/
+/*  min-height: 100vh;*/
   display: flex;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+/*  font-size: calc(10px + 2vmin);*/
 }
 
-@media (prefers-color-scheme: dark) {
-  .App-content {
-    background-color: #282c34;
-    color: white;
-  }
-}
+/*@media (prefers-color-scheme: dark) {*/
+/*  .App-content {*/
+/*    background-color: #282c34;*/
+/*    color: white;*/
+/*  }*/
+/*}*/

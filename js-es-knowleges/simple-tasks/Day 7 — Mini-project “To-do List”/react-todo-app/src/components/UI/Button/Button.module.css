@@ -6,6 +6,10 @@
     transition: background 0.2s ease, border-color 0.2s ease;
 }
 
+.button:hover {
+    transform: scale(1.05);
+}
+
 /* Active: press effect */
 .button:active {
     transform: scale(0.95);
@@ -75,4 +79,12 @@
 .notification:hover {
     background: var(--pinky);
     color: black;
+}
+
+.notification {
+    background: white;
+    color: var(--danger);
+    border: none;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
 }

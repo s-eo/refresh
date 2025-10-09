@@ -23,7 +23,7 @@ function App() {
       <article className="App-content">
           <Card width="column">
               <header>
-                  <h1>To-Do list</h1>
+                  <h1 className='title'>To-Do list</h1>
               </header>
              <TodoProvider>
                  <Card>

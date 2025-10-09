@@ -1,48 +1,73 @@
+/*.container {*/
+/*    display: grid;*/
+/*    grid-template-columns: auto min-content;*/
+/*    grid-template-rows: auto auto;*/
+/*    grid-template-areas: "main trash" "deadline ." ;*/
+/*    margin-top: 0.5em;*/
+/*    font-size: 0.9em;*/
+/*    border-radius: 5px;*/
+/*    padding: 5px;*/
+/*}*/
+
+/*.container:nth-of-type(even) {*/
+/*    background-color: var(--grey-greeny);*/
+/*}*/
+
+/*@media (prefers-color-scheme: dark) {*/
+/*    .container {*/
+/*        background-color: var(--dark-green);*/
+/*    }*/
+/*}*/
+
+/*.main {*/
+/*    grid-area: main;*/
+/*}*/
+
+/*.title {*/
+/*    margin-left: 0.25em;*/
+/*}*/
+
+/*.trash {*/
+/*    grid-area: trash;*/
+/*}*/
+
+/*.img {*/
+/*    height: 1lh;*/
+/*    vertical-align: text-bottom;*/
+/*}*/
+
+/*.deadline {*/
+/*    grid-area: deadline;*/
+/*    text-align: right;*/
+/*    font-size: 0.66em;*/
+/*    font-weight: bold;*/
+/*    font-variant: traditional;*/
+/*}*/
+/*.deadline.stale {*/
+/*    color: salmon;*/
+/*}*/
+
 .container {
-    display: grid;
-    grid-template-columns: auto min-content;
-    grid-template-rows: auto auto;
-    grid-template-areas: "main trash" "deadline ." ;
-    margin-top: 0.5em;
-    font-size: 0.9em;
-    border-radius: 5px;
-    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--background);
+    padding: 0.6rem 0.8rem;
+    border-radius: var(--radius);
 }
 
-.container:nth-of-type(even) {
-    background-color: var(--grey-greeny);
-}
-
-@media (prefers-color-scheme: dark) {
-    .container {
-        background-color: var(--dark-green);
-    }
-}
-
-.main {
-    grid-area: main;
-}
-
-.title {
-    margin-left: 0.25em;
+.container:hover {
+    background-color: #eef2f3;
 }
 
 .trash {
-    grid-area: trash;
+    background-color: #ffecec;
+    color: var(--danger);
+    border: none;
+    border-radius: 6px;
+    padding: 0.3rem 0.5rem;
 }
 
-.img {
-    height: 1lh;
-    vertical-align: text-bottom;
-}
-
-.deadline {
-    grid-area: deadline;
-    text-align: right;
-    font-size: 0.66em;
-    font-weight: bold;
-    font-variant: traditional;
-}
-.deadline.stale {
-    color: salmon;
+.trash:hover {
+    background-color: #f5dada;
 }

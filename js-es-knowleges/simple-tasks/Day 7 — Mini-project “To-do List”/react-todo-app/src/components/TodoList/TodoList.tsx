@@ -1,4 +1,4 @@
-import React, {useMemo, useState} from "react";
+import React, {useMemo} from "react";
 
 import TodoItem from "../TodoItem/TodoItem";
 import {useTodos, useTodosDispatch} from '../TodoContext/TodoContext';

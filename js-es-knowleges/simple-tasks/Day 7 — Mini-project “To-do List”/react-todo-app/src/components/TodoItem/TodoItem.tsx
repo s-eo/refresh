@@ -37,7 +37,7 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
             </span>
 
             <Button
-                variant="danger"
+                variant='outline'
                 onClick={handleDelete}
                 className={styles.trash}
                 aria-label="Delete task"

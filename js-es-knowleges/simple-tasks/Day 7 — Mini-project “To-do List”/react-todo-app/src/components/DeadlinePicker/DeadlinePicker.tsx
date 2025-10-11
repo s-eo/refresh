@@ -25,6 +25,7 @@ export default function DeadlinePicker({ deadline, handleDeadlineChange, isDisab
                 optionLabels={["Has deadline", "No deadline"]}
                 width={100}
                 isDisabled={isDisabled}
+                className={styles.toggle}
             />
             {hasDeadline && <input
                 type="date"

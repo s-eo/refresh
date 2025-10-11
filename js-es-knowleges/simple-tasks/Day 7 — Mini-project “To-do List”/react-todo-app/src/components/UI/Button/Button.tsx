@@ -3,7 +3,7 @@ import clsx from "clsx";
 
 import styles from "./Button.module.css";
 
-type Variant = "primary" | "secondary" | "danger" | "outline" | "notification" | "grouped";
+type Variant = "primary" | "secondary" | "outline" | "notification" | "grouped";
 
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
     variant?: Variant;

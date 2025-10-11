@@ -13,6 +13,8 @@
     --border: #e5e7eb;
     --text: #2c3e50;
     --muted: #6b7280;
+    --disabled: #f4f7f7;
+    --disabled-bg: #b7c9c6;
     --radius: 12px;
     --radius-small: 5px;
     --shadow: 0 4px 10px rgba(24, 76, 69, 0.25);

@@ -49,14 +49,14 @@
 
 /* Disabled state */
 .primary:disabled {
-    background-color: #b7c9c6;
-    color: #f4f7f7;
+    background-color: var(--disabled-bg);
+    color: var(--disabled);
     cursor: not-allowed;
 }
 
 .secondary {
-    background-color: #f4f7f7;
-    color: #184c45; /* deep green */
+    background-color: var(--disabled);
+    color: var(--primary-dark);
 }
 
 .secondary:hover:not(:disabled) {
@@ -119,16 +119,6 @@
 .grouped:focus-visible {
     outline: 2px solid rgba(32, 105, 95, 0.18);
     outline-offset: 2px;
-}
-
-.danger {
-    background: var(--primary-light);
-    color: var(--text);
-}
-.danger:hover {
-    background: palevioletred;
-    color: white;
-    filter: none;
 }
 
 .outline {

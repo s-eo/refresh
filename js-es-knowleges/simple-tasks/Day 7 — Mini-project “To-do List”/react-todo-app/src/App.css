@@ -6,10 +6,6 @@
   margin: 0;
 }
 
-/*.App {*/
-/*  text-align: center;*/
-/*}*/
-
 .App {
   background: linear-gradient(180deg, #f9fafb, #eaf3f1);
   font-family: 'Inter', sans-serif;
@@ -20,14 +16,8 @@
   width: 100vw;
   height: 100vh;
   overflow: auto;
-
-/*  user-select: none;*/
-/*  background-color: var(--pinky);*/
-/*  color: var(--dark-grey);*/
-/*  min-height: 100vh;*/
   display: flex;
   justify-content: center;
-/*  font-size: calc(10px + 2vmin);*/
 }
 
 /*@media (prefers-color-scheme: dark) {*/
@@ -52,7 +42,12 @@
 }
 
 @media (min-width: 480px) {
+  .App {
+    display: block;
+  }
+
   .App-content {
     width: 50vw;
+    margin: auto;
   }
 }

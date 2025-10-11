@@ -31,16 +31,15 @@ export default function TodoList({ filter }: Props) {
         });
     }
 
-    return (
+    return visibleTasks.length ?
         <ul className={styles.list}>
-            {visibleTasks.length ? visibleTasks.map(todo => (
+            {visibleTasks.map(todo => (
                 <TodoItem
                     key={todo.id}
                     todo={todo}
                     toggleTodo={handleToggleTodo}
                     deleteTodo={handleDeleteTodo}
                 />
-            )) : <span>No more tasks there</span>}
-        </ul>
-    );
+            ))}
+        </ul> : <div className={styles.empty}>No more tasks there</div>;
 }

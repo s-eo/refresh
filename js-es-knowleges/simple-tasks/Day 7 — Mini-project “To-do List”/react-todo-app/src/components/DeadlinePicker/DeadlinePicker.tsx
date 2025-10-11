@@ -1,7 +1,6 @@
 import React, {ChangeEventHandler, useMemo, useState} from 'react';
 
 import ToggleSwitch from "../UI/ToggleSwitch/ToggleSwitch";
-import FunctionalityRow from "../FunctionalityRow/FunctionalityRow";
 import {getInputDate} from "./helper";
 
 import styles from './DeadlinePicker.module.css';
@@ -18,14 +17,7 @@ export default function DeadlinePicker({ deadline, handleDeadlineChange, isDisab
     const deadlineInput = useMemo<string | undefined>(() => getInputDate(deadline), [deadline])
 
     return (
-        <FunctionalityRow>
-            {hasDeadline && <input
-                type="date"
-                value={deadlineInput}
-                onChange={handleDeadlineChange}
-                className={styles.input}
-                disabled={isDisabled}
-            />}
+        <div>
             <ToggleSwitch
                 name="dealinePicker"
                 checked={hasDeadline}
@@ -34,6 +26,13 @@ export default function DeadlinePicker({ deadline, handleDeadlineChange, isDisab
                 width={100}
                 isDisabled={isDisabled}
             />
-        </FunctionalityRow>
+            {hasDeadline && <input
+                type="date"
+                value={deadlineInput}
+                onChange={handleDeadlineChange}
+                className={styles.input}
+                disabled={isDisabled}
+            />}
+        </div>
     );
 }

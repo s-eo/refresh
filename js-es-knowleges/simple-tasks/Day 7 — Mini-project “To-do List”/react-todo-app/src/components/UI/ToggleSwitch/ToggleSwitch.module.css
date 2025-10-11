@@ -6,6 +6,10 @@
     -moz-user-select: none;
     -ms-user-select: none;
     text-align: left;
+    cursor: pointer;
+
+    --disabled: #d7d8dc;
+    --text-disabled: #576274;
 }
 
 .checkbox {
@@ -32,7 +36,7 @@
     content: "Yes";
     text-transform: uppercase;
     padding-left: 10px;
-    background-color: #f90;
+    background: var(--primary);
     color: #fff;
 }
 
@@ -48,12 +52,7 @@
 }
 
 .disabled {
-    background-color: #ddd;
-    cursor: not-allowed;
-}
-
-.disabled:before {
-    background-color: #ddd;
+    background-color: var(--disabled);
     cursor: not-allowed;
 }
 
@@ -61,8 +60,8 @@
     content: "No";
     text-transform: uppercase;
     padding-right: 10px;
-    background-color: #bbb;
-    color: #fff;
+    background-color: var(--disabled);
+    color: var(--text-disabled);
     text-align: right;
 }
 
@@ -75,7 +74,7 @@
     top: 0;
     bottom: 0;
     right: calc(100% - 34px);
-    border: 0 solid #bbb;
+    border: 0 solid var(--disabled);
     border-radius: 20px;
     transition: all 0.3s ease-in 0s;
     font-size: 0.5em;

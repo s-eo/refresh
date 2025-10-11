@@ -1,28 +1,16 @@
+
+/*@media (min-width: 480px) {*/
+/*    .container {*/
+/*        justify-content: start;*/
+
+/*    }*/
+/*}*/
+
 .container {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-    margin: 1em 0 0;
-    justify-content: center;
-    border-radius: 5px;
-    border: 1px solid green;
-    padding: 0.5em 1em;
-}
-
-@media (min-width: 480px) {
-    .container {
-        justify-content: start;
-
-    }
-}
-
-.button {
-    cursor: pointer;
-    transition: all 0.2s ease;
-    font-size: 0.9rem;
-    margin: 0;
-}
-
-.button ~ .button {
-    margin-left: 0.5rem;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-small);
+    overflow: hidden;               /* this makes the whole group rounded */
+    background: white;
 }

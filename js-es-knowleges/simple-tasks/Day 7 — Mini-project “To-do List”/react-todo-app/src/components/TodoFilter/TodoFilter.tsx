@@ -41,10 +41,10 @@ export default function TodoFilter({ filter, setFilter }: TodoFilterProps) {
         <div className={styles.container}>
             {filters.map((filterType: Filter) => (
                 <Button
-                    variant={filter === filterType ? 'primary' : 'outline'}
+                    variant='grouped'
                     key={filterType}
+                    active={filterType === filter}
                     onClick={onNewFilter(filterType)}
-                    className={[styles.button].join(" ")}
                 >{filterType}</Button>
              ))}
         </div>

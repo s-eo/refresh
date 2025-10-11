@@ -6,10 +6,11 @@ import clsx from "clsx";
 interface FunctionalityRowProps {
     children?: React.ReactNode;
     className?: string;
+    alignTop?: boolean;
 }
 
-export default function FunctionalityRow({ children, className}: FunctionalityRowProps) {
+export default function FunctionalityRow({ children, className, alignTop = false }: FunctionalityRowProps) {
     return (
-      <div className={clsx(className, styles.container)}>{children}</div>
+      <div className={clsx(styles.container, className, { [styles.top]: alignTop })}>{children}</div>
     );
 }

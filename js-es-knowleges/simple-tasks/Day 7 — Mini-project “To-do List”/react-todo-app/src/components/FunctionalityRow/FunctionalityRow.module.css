@@ -3,6 +3,17 @@
     justify-content: space-between;
     gap: 0.5em;
     font-size: 1rem;
+    /*padding-top: 1rem;*/
+}
+
+.container.top {
+    align-items: start;
+}
+
+.container:not(.top) {
     align-items: center;
-    padding-top: 1rem;
+}
+
+.container + .container {
+    margin-top: 1rem;
 }

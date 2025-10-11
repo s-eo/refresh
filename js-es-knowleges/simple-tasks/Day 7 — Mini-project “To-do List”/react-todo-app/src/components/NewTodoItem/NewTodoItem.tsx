@@ -1,6 +1,5 @@
 import React, {useState, useRef, RefObject, useCallback, useContext} from "react";
 
-import plusIcon from "../../assets/plus.svg";
 import Button from "../UI/Button/Button";
 import styles from './NewTodoItem.module.css';
 import FunctionalityRow from "../FunctionalityRow/FunctionalityRow";
@@ -73,21 +72,22 @@ export default function NewTodoItem() {
                     className={styles.name}
                     disabled={isDisabled}
                 />
+            </FunctionalityRow>
+            <FunctionalityRow alignTop>
+                <DeadlinePicker
+                    deadline={deadline}
+                    handleDeadlineChange={handleDeadlineChange}
+                    isDisabled={isDisabled}
+                />
                 <Button
                     variant="primary"
                     type="submit"
                     disabled={isDisabled}
                     registerButtonRef={submitRefRegistrar}
-                    className={[styles.add, styles.button].join(" ")}
-                ><img className={styles.plus} src={plusIcon} alt="+"/>
-                </Button>
+                    className={[styles.button, styles.add].join(" ")}
+                >+</Button>
             </FunctionalityRow>
 
-            <DeadlinePicker
-                deadline={deadline}
-                handleDeadlineChange={handleDeadlineChange}
-                isDisabled={isDisabled}
-            />
         </form>
     );
 }

@@ -23,14 +23,15 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
     const isStale = useMemo(() => dLTimestamp ? +dLTimestamp < Date.now() : false, [dLTimestamp]);
 
     return (
-        <li className={styles.container}>
+        <li className={clsx(styles.container, completed && styles.completed)}>
             <span className={styles.main}>
                 <input
                     type="checkbox"
                     checked={completed}
                     onChange={handleChange}
+                    className={styles.checkbox}
                 />
-                <span className={styles.title} style={{textDecoration: completed ? "line-through" : "none"}}>
+                <span className={styles.title}>
                   {title}
                 </span>
             </span>
@@ -39,6 +40,7 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
                 variant="danger"
                 onClick={handleDelete}
                 className={styles.trash}
+                aria-label="Delete task"
             >
                 <img className={styles.img} src={deleteIcon} alt="x"/>
             </Button>

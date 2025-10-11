@@ -1,48 +1,170 @@
+/*.container {*/
+/*    display: grid;*/
+/*    grid-template-columns: auto min-content;*/
+/*    grid-template-rows: auto auto;*/
+/*    grid-template-areas: "main trash" "deadline ." ;*/
+/*    margin-top: 0.5em;*/
+/*    font-size: 0.9em;*/
+/*    border-radius: 5px;*/
+/*    padding: 5px;*/
+/*}*/
+
+/*.container:nth-of-type(even) {*/
+/*    background-color: var(--grey-greeny);*/
+/*}*/
+
+/*@media (prefers-color-scheme: dark) {*/
+/*    .container {*/
+/*        background-color: var(--dark-green);*/
+/*    }*/
+/*}*/
+
+/*.main {*/
+/*    grid-area: main;*/
+/*}*/
+
+/*.title {*/
+/*    margin-left: 0.25em;*/
+/*}*/
+
+/*.trash {*/
+/*    grid-area: trash;*/
+/*}*/
+
+/*.img {*/
+/*    height: 1lh;*/
+/*    vertical-align: text-bottom;*/
+/*}*/
+
+/*.deadline {*/
+/*    grid-area: deadline;*/
+/*    text-align: right;*/
+/*    font-size: 0.66em;*/
+/*    font-weight: bold;*/
+/*    font-variant: traditional;*/
+/*}*/
+/*.deadline.stale {*/
+/*    color: salmon;*/
+/*}*/
+
+/* Each task item row */
 .container {
-    display: grid;
-    grid-template-columns: auto min-content;
-    grid-template-rows: auto auto;
-    grid-template-areas: "main trash" "deadline ." ;
-    margin-top: 0.5em;
-    font-size: 0.9em;
-    border-radius: 5px;
-    padding: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--border);
+    background: white;
+    transition: background-color var(--transition), transform var(--transition);
 }
 
-.container:nth-of-type(even) {
-    background-color: var(--grey-greeny);
+.container:last-child {
+    border-bottom: none;
 }
 
-@media (prefers-color-scheme: dark) {
-    .container {
-        background-color: var(--dark-green);
-    }
+/* hover state for each row */
+.container:hover {
+    background: var(--green-100);
+    transform: translateY(-1px);
 }
 
+/* checkbox and text wrapper */
 .main {
-    grid-area: main;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex: 1;
 }
 
+.checkbox {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    flex: 0 0 18px;
+    height: 18px;
+    border: 1.5px solid #d1d5db; /* light gray border */
+    border-radius: 4px;
+    background-color: #ffffff;
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.checkbox:hover {
+    border-color: #9ca3af; /* subtle darker border on hover */
+}
+
+.checkbox:checked {
+    background-color: #169eb9; /* ✅ correct teal color from your mockup */
+    border-color: #169eb9;
+}
+
+.checkbox:checked::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 5px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox:active {
+    transform: scale(0.95);
+}
+
+
+/* task text */
 .title {
-    margin-left: 0.25em;
+    color: var(--primary-dark);
+    font-size: 0.95rem;
+    transition: color var(--transition), text-decoration var(--transition);
 }
 
+/* completed task */
+.completed .title {
+    color: rgba(24, 76, 69, 0.45);
+    text-decoration: line-through;
+}
+
+/* delete icon */
 .trash {
-    grid-area: trash;
+    background: none;
+    border: none;
+    color: rgba(24, 76, 69, 0.4);
+    cursor: pointer;
+    font-size: 1.1rem;
+    transition: color var(--transition), transform 0.12s;
+}
+
+.trash:hover {
+    color: var(--green-600);
+    transform: scale(1.1);
+}
+.trash {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #0e5751;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: background 0.2s ease, transform 0.15s ease, color 0.2s ease;
+}
+
+.trash:hover {
+    background: #e6f4f1;
+    color: #08413c;
+    transform: scale(1.05);
+}
+
+.trash:active {
+    transform: scale(0.95);
 }
 
 .img {
-    height: 1lh;
-    vertical-align: text-bottom;
-}
-
-.deadline {
-    grid-area: deadline;
-    text-align: right;
-    font-size: 0.66em;
-    font-weight: bold;
-    font-variant: traditional;
-}
-.deadline.stale {
-    color: salmon;
+    width: 0.9rem;
+    height: 0.9rem;
 }

@@ -1,16 +1,16 @@
-import React, {ReactNode} from 'react';
+import React, {ComponentProps, ReactNode} from 'react';
 
 import styles from "./Card.module.css";
 import clsx from "clsx";
 
-interface CardProps {
+interface CardProps extends ComponentProps<any>{
     children: ReactNode;
-    width?: 'initial' | 'column';
+    visible?: boolean;
 }
 
-export default function Card({ children, width = 'initial' }: CardProps) {
+export default function Card({ children, visible = false, className, ...rest }: CardProps) {
     return (
-        <div className={clsx(styles.card, styles[width])}>
+        <div className={clsx(styles.card, visible && styles.visible, className)} {...rest}>
             {children}
         </div>
     );

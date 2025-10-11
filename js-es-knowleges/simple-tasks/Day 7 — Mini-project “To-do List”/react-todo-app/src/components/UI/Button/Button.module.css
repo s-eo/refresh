@@ -1,9 +1,18 @@
 .button {
     border: none;
-    border-radius: 5px;
+    border-radius: var(--radius);
     padding: 5px 15px;
     cursor: pointer;
-    transition: background 0.2s ease, border-color 0.2s ease;
+    font-weight: 600;
+    transition:
+            background 0.2s ease,
+            border-color 0.2s ease,
+            transform 0.15s ease,
+            color 0.25s ease;
+}
+
+.button:hover {
+    transform: scale(1.05);
 }
 
 /* Active: press effect */
@@ -15,39 +24,119 @@
 /* Focus (keyboard navigation) */
 .button:focus {
     outline: 2px solid rgba(255, 255, 255, 0.7);
-    outline-offset: 2px;
 }
 
 .primary {
-    background: var(--dark-green);
+    background-color: var(--primary-dark); /* deep green background */
     color: white;
-    border-radius: 6px;
 }
 
 .primary:focus {
-    outline: 2px solid #333;
-    background: var(--sea-greeny);
+    outline: 2px solid var(--primary);
 }
-.primary:hover {
-    background: var(--sea-greeny);
+.primary:hover:not(:disabled) {
+    background-color: var(--green-600);
+}
+
+.primary:active:not(:disabled) {
+    background-color: var(--green-dark);
+}
+
+/* Focus ring */
+.primary:focus-visible {
+    outline: 2px solid rgba(32, 105, 95, 0.18);
+}
+
+/* Disabled state */
+.primary:disabled {
+    background-color: #b7c9c6;
+    color: #f4f7f7;
+    cursor: not-allowed;
+}
+
+.secondary {
+    background-color: #f4f7f7;
+    color: #184c45; /* deep green */
+}
+
+.secondary:hover:not(:disabled) {
+    background-color: #e6eeed;
+}
+
+.secondary:active:not(:disabled) {
+    background-color: #d8e3e1;
+}
+
+.secondary:focus-visible {
+    outline: 2px solid #2a8478;
+}
+
+.secondary:disabled {
+    background: #edf1f0;
+    color: #edf1f0;
+    cursor: not-allowed;
+}
+
+.grouped {
+    flex: 1;                        /* makes all buttons equal width */
+    padding: 10px;                /* vertical padding, centered label */
+    border: none;                   /* IMPORTANT: remove per-button borders */
+    border-radius: 0;
+    background: transparent;
+    color: var(--primary-dark);
+    font-weight: 500;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+}
+
+.grouped + .grouped {
+    /* no visible border required — keep it empty or use a very faint divider */
+    border-left: 1px solid var(--border);
+}
+
+/* hover for non-active buttons */
+.grouped:not(.active):hover {
+    background: var(--green-100);
+    color: var(--primary-dark);
+    transform: scale(1);
+    outline: none;
+}
+
+/* active button: filled green */
+.grouped.active {
+    background: var(--primary-dark);
+    color: white;
+}
+
+/* active hover state */
+.grouped.active:hover {
+    background: var(--green-600);
+    border-color: var(--green-600);
+}
+
+/* accessibility focus */
+.grouped:focus-visible {
+    outline: 2px solid rgba(32, 105, 95, 0.18);
+    outline-offset: 2px;
 }
 
 .danger {
-    background: var(--pinky);
-    color: var(--dark-grey);
+    background: var(--primary-light);
+    color: var(--text);
 }
 .danger:hover {
-    background: var(--pinky-hover);
+    background: palevioletred;
     color: white;
     filter: none;
 }
 
 .outline {
     background: transparent;
-    color: var(--dark-grey);
+    color: var(--text);
 }
 .outline:hover {
-    background: var(--dark-green);
+    background: var(--primary-dark);
     color: white;
 }
 
@@ -73,6 +162,14 @@
 }
 
 .notification:hover {
-    background: var(--pinky);
+    background: palevioletred;
     color: black;
+}
+
+.notification {
+    background: white;
+    color: var(--danger);
+    border: none;
+    border-radius: 6px;
+    padding: 0.3rem 0.6rem;
 }

@@ -30,11 +30,11 @@ export const todoReducers = (prevState: Todo[] | undefined, action: any): Todo[]
 
             case 'added':
                 return [
-                    ...prevState || [],
                     {
                         ...action.payload,
                         id: getNextId(prevState || [{ id: 1, title: '', completed: false }])
-                    }
+                    },
+                    ...prevState || [],
                 ];
 
             case 'clearCompleted':

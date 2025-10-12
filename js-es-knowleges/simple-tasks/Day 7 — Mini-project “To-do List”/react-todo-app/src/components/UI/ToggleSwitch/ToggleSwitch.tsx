@@ -1,9 +1,9 @@
-import React, {ChangeEvent, useMemo} from 'react';
+import React, {ChangeEvent, ComponentProps, useMemo} from 'react';
 import clsx from "clsx";
 
 import styles from './ToggleSwitch.module.css';
 
-interface ToggleSwitchProps {
+interface ToggleSwitchProps extends ComponentProps<any>{
     name: string;
     checked: boolean;
     setChecked: (checked: boolean) => void;
@@ -12,12 +12,16 @@ interface ToggleSwitchProps {
     isDisabled?: boolean;
 }
 
-function ToggleSwitch({ name, checked, setChecked, optionLabels=["Yes", "No"], width, isDisabled=false }: ToggleSwitchProps) {
+function ToggleSwitch({ name, checked, setChecked, optionLabels=["Yes", "No"], width, isDisabled=false, className, ...restProps }: ToggleSwitchProps) {
     const handleToggleSwitch = (event: ChangeEvent<HTMLInputElement>) => setChecked(event.target.checked);
     const containerWidth = useMemo(() => (width ? width + 'px' : 'initial'), [width]);
 
     return (
-        <div className={styles.container} style={{width: containerWidth}}>
+        <div
+            className={clsx(styles.container, className)}
+            style={{width: containerWidth}}
+            {...restProps}
+        >
             <input
                 type="checkbox"
                 className={styles.checkbox}

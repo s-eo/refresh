@@ -22,7 +22,7 @@ export default function NewTodoItem() {
             payload: {
                 completed: false,
                 title: newTaskName,
-                deadline: String(deadline?.valueOf())
+                ...(deadline && { deadline: String(deadline?.valueOf()) })
             },
         });
     }

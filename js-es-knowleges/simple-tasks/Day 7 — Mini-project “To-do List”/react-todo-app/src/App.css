@@ -6,6 +6,11 @@
   margin: 0;
 }
 
+/* Make page height on mobile to take to the account the address bar in the bottom */
+html, body, #root, .App {
+  height: 100%;
+}
+
 .App {
   background: linear-gradient(180deg, #f9fafb, #eaf3f1);
   font-family: 'Inter', sans-serif;
@@ -14,7 +19,6 @@
   padding: 3rem 2rem 2rem;
 
   width: 100vw;
-  height: 100vh;
   overflow: auto;
   display: flex;
   justify-content: center;
@@ -44,6 +48,7 @@
 @media (min-width: 480px) {
   .App {
     display: block;
+    height: 100vh;
   }
 
   .App-content {

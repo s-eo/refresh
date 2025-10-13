@@ -52,7 +52,7 @@
 }
 
 .checkbox:checked {
-    background-color: #169eb9; /* ✅ correct teal color from your mockup */
+    background-color: var(--correct); /* ✅ correct teal color from your mockup */
     border-color: #169eb9;
 }
 

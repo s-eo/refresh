@@ -142,24 +142,35 @@
 /** Notification button */
 .notification {
     background: white;
-    border: none;
-    padding: 4px 8px;
-    border-radius: 4px;
-    color: black;
-    font-size: 13px;
-    cursor: pointer;
-    transition: background 0.2s;
-}
-
-.notification:hover {
-    background: palevioletred;
-    color: black;
-}
-
-.notification {
-    background: white;
     color: var(--danger);
     border: none;
     border-radius: 6px;
     padding: 0.3rem 0.6rem;
+}
+
+/* Hover */
+.notification:hover {
+    background-color: rgba(255, 255, 255, 0.85);
+    transform: translateY(-1px);
+}
+
+/* Focus (keyboard navigation or click) */
+.notification:focus {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5);
+}
+
+/* Active (clicking) */
+.notification:active {
+    transform: translateY(0);
+    box-shadow: none;
+    background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* Disabled state (optional) */
+.notification:disabled {
+    background: rgba(255, 255, 255, 0.4);
+    color: rgba(211, 60, 60, 0.5);
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }

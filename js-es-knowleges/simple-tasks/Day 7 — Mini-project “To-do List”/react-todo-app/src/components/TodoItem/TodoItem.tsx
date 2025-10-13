@@ -24,17 +24,20 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
 
     return (
         <li className={clsx(styles.container, completed && styles.completed)}>
-            <span className={styles.main}>
-                <input
-                    type="checkbox"
-                    checked={completed}
-                    onChange={handleChange}
-                    className={styles.checkbox}
-                />
+            <input
+                type="checkbox"
+                checked={completed}
+                onChange={handleChange}
+                className={styles.checkbox}
+            />
+            <div className={styles.main}>
                 <span className={styles.title}>
                   {title}
                 </span>
-            </span>
+                {deadline && (<div className={clsx(styles.deadline, isStale ? styles.overdue : styles.upcoming)}>
+                    Due: {deadline}
+                </div>)}
+            </div>
 
             <Button
                 variant='outline'
@@ -44,9 +47,6 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
             >
                 <img className={styles.img} src={deleteIcon} alt="x"/>
             </Button>
-            {deadline && (<div className={clsx(styles.line, styles.deadline, isStale && styles.stale)}>
-                <span>Until {deadline}</span>
-            </div>)}
         </li>
     );
 }

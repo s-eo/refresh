@@ -12,6 +12,10 @@
 }
 
 .notificationCard {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    gap: 0.75rem;
     border-radius: 6px;
     padding: 12px 16px;
     margin-bottom: 10px;
@@ -25,17 +29,14 @@
     pointer-events: all;
 }
 
-.notificationText {
-    display: flex;
-    justify-content: space-between;
-    align-items: start;
+.main {
     font-weight: lighter;
+    line-height: 1.4;
 }
 
 .img {
     width: 2rem;
     height: 2rem;
-    margin-right: 0.5rem;
 }
 
 /* Error (Red) */
@@ -62,7 +63,7 @@
 }
 
 /* Close button */
-.notificationClose {
+.close {
     background: none;
     border: none;
     font-size: 18px;
@@ -71,11 +72,11 @@
     color: inherit;
 }
 
-.notificationClose:hover {
+.close:hover {
     opacity: 0.8;
 }
 
-.notificationActions {
+.actions {
     display: flex;
     align-items: center;
     gap: 8px;
@@ -103,7 +104,7 @@
 
 
 /* Transition when one closes (slide others up) */
-.notification-leave {
+.leave {
     animation: slideOut 0.25s ease forwards;
 }
 

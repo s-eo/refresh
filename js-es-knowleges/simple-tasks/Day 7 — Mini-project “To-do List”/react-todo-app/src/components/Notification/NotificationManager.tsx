@@ -1,41 +1,58 @@
-import React, {ComponentProps} from "react";
-import styles from "./NotificationBox.module.css";
+import React, {
+    ActionDispatch,
+    ComponentProps,
+    createContext,
+    MouseEventHandler,
+    useCallback,
+    useReducer
+} from "react";
 
-export default function NotificationManager(props: ComponentProps<any>) {
-    const [notifications, setNotifications] = React.useState([
-        { id: 1, type: "error", message: "Can’t fetch example tasks" },
-        { id: 2, type: "success", message: "Task added successfully" },
-    ]);
+import styles from "./Notification.module.css";
+import NotificationCard from "./NotificationCard";
+import notificationReducer from "./notificationReducer";
+import RetryButton from "./RetryButton";
 
-    const closeNotification = (id: number) => {
+export const NotificationDispatchContext = createContext<ActionDispatch<[action: any]> | null>(null);
+
+export default function NotificationManager({ children }: ComponentProps<any>) {
+    const [notifications, dispatchNotifications] = useReducer(notificationReducer, []);
+
+    const closeNotification= useCallback((id: number): MouseEventHandler<HTMLButtonElement>  => event => {
         const element = document.getElementById(`notif-${id}`);
         if (element) {
-            element.classList.add(styles.notificationLeave);
+            element.classList.add(styles.leave);
             setTimeout(() => {
-                setNotifications((prev) => prev.filter((n) => n.id !== id));
+                dispatchNotifications({
+                    type: 'remove',
+                    payload: id
+                });
             }, 250);
         }
-    };
+    }, [dispatchNotifications]);
+    const onRetry = useCallback((id: number, retryAction: Function): MouseEventHandler<HTMLButtonElement> => (event) => {
+        retryAction(event);
+        closeNotification(id)(event);
+    }, [closeNotification])
 
     return (
-        <div className={styles.notificationContainer}>
-            {notifications.map((n) => (
-                <div
-                    key={n.id}
-                    id={`notif-${n.id}`}
-                    className={[`notification ${n.type}`, styles.notificationCard, styles[n.type]].join(' ')}
-                >
-                    <div className={styles.notificationText}>
-                        <p>{n.message}</p>
-                        {n.type === "error" && (
-                            <button className={styles.notificationActions}>Try again ↻</button>
-                        )}
-                    </div>
-                    <button className={styles.notificationClose} onClick={() => closeNotification(n.id)}>
-                        &times;
-                    </button>
-                </div>
-            ))}
-        </div>
-    );
+        <NotificationDispatchContext value={dispatchNotifications}>
+            {children}
+            <div className={styles.notificationContainer}>
+                {notifications.map((card) => (
+                    <NotificationCard
+                        key={card.id}
+                        id={`notif-${card.id}`}
+                        type={card.type}
+                        message={card.message}
+                        onClose={closeNotification(card.id)}
+                    >
+                        {typeof card.retryAction === 'function' &&
+                            <RetryButton handleClick={onRetry(card.id, card.retryAction)}/>
+                        }
+                    </NotificationCard>
+                ))}
+            </div>
+        </NotificationDispatchContext>
+    )
+        ;
 }

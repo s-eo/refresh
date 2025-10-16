@@ -5,6 +5,7 @@ import {storeTodos} from "../LocalStorage/LocalStorage";
 import {usePredefinedTodos} from "./predefinedTodos";
 import {fetchTodoReducer, todoReducers} from "./todoReducers";
 import {FetchState} from "../../types/fetch";
+import {NotificationDispatchContext} from "../Notification/NotificationManager";
 
 export const TodoContext = createContext<Todo[] | undefined>(undefined);
 export const TodoDispatchContext = createContext<Function | null>(null);
@@ -27,9 +28,10 @@ interface Props {
 export const TodoProvider = ({children}: Props) => {
     const [todos, dispatch] = useReducer(todoReducers, undefined);
     const [fetchTodosState, dispatchFetchTodosState] = useReducer(fetchTodoReducer, 'initial');
+    const dispatchNotifications = useContext(NotificationDispatchContext);
 
     // set initial todos async
-    usePredefinedTodos({dispatch, dispatchFetchTodosState});
+    usePredefinedTodos({dispatch, dispatchFetchTodosState, dispatchNotifications});
 
     // save all changes to Local Storage
     useEffect(() => {

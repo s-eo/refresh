@@ -13,6 +13,7 @@ import RemainPanel from "./components/RemainPanel/RemainPanel";
 import FetchManager from "./components/FetchManager/FetchManager";
 
 import './App.css';
+import NotificationManager from "./components/Notification/NotificationManager";
 
 
 function App() {
@@ -24,23 +25,25 @@ function App() {
           <header>
               <h1 className='title'>To-Do list</h1>
           </header>
-         <TodoProvider>
-             <Card>
-                 <NewTodoItem />
-                 <TodoFilter filter={filter} setFilter={setFilter}/>
-                 <FunctionalityRow>
-                     <RemainPanel />
-                 </FunctionalityRow>
-             </Card>
-             <Card className="shrinkable">
-                 <FetchManager>
-                     <TodoList filter={filter} />
-                 </FetchManager>
-             </Card>
-             <Card>
-                 <ClearCompleted />
-             </Card>
-         </TodoProvider>
+          <NotificationManager>
+              <TodoProvider>
+                  <Card>
+                      <NewTodoItem />
+                      <TodoFilter filter={filter} setFilter={setFilter}/>
+                      <FunctionalityRow>
+                          <RemainPanel />
+                      </FunctionalityRow>
+                  </Card>
+                  <Card className="shrinkable">
+                      <FetchManager>
+                          <TodoList filter={filter} />
+                      </FetchManager>
+                  </Card>
+                  <Card>
+                      <ClearCompleted />
+                  </Card>
+              </TodoProvider>
+          </NotificationManager>
       </Card>
     </div>
   );

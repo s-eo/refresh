@@ -12,12 +12,18 @@
     --surface: #ffffff;
     --border: #e5e7eb;
     --text: #2c3e50;
+    --text-secondary: #6b7b7b;
     --muted: #6b7280;
     --disabled: #f4f7f7;
     --disabled-bg: #b7c9c6;
     --radius: 12px;
     --radius-small: 5px;
     --shadow: 0 4px 10px rgba(24, 76, 69, 0.25);
+    --danger: #d64545;
+    --warning: #d9822b;
+    --warning-light: #e6a23c;
+    --correct: #169eb9;
+    --success: #1b7d59;
 }
 
 li {

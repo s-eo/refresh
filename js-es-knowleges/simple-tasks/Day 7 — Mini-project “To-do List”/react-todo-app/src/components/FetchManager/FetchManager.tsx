@@ -58,6 +58,10 @@ export function initialFetchManager(dispatch: Function | null, dispatchFetchTodo
 
             const isErrorNeeded = !isFirstErrorSent || !isFirstTrayErrorSent;
             let message = isFirstErrorSent && !isFirstTrayErrorSent ? ARTIFICIAL_ERROR : null;
+
+            if (isFirstErrorSent) {
+                isFirstTrayErrorSent = true;
+            }
             isFirstErrorSent = true;
 
             longFetch(isErrorNeeded)
@@ -77,7 +81,6 @@ export function initialFetchManager(dispatch: Function | null, dispatchFetchTodo
                             retryAction: initializer,
                         }
                     });
-                    isFirstTrayErrorSent = true;
                 });
         }
     }

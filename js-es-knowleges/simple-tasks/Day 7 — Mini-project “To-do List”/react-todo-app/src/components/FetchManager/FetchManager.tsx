@@ -6,7 +6,7 @@ import {Todo} from "../../types/todo";
 import {promisifiedTimeout} from "../TodoContext/helper";
 
 const TASKS_URL = 'https://jsonplaceholder.typicode.com/todos';
-const LOADER_TIME = 1000; //ms
+const LOADER_TIME = 2000; //ms
 const time = Math.round(LOADER_TIME / 1000);
 const DEFAULT_ERROR = 'Can`t fetch example tasks';
 const ARTIFICIAL_ERROR = 'Error from notification bar. Next attempt should be successfull';
@@ -28,11 +28,12 @@ export const fetchTasks = async (): Promise<Todo[]> => new Promise(async (resolv
     }
 });
 export const longFetch: (needError?: boolean) => Promise<Todo[]> = async (needError = false) => {
-    if (needError) {
-       return Promise.reject(DEFAULT_ERROR);
-   }
-
     const longFetchResult = await Promise.all([fetchTasks(), promisifiedTimeout(LOADER_TIME)]);
+
+    if (needError) {
+        return Promise.reject(DEFAULT_ERROR);
+    }
+
     return longFetchResult[0];
 }
 

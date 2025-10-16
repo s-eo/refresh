@@ -92,12 +92,12 @@ interface Props {
 
 export default function FetchManager({children}: Props):JSX.Element {
     const fetchState = useContext(FetchTodoContext);
-    
-    if (fetchState === 'pending')
-            return <Loading>
-                <p>Loading task examples.</p>
-                <p>Please wait {time} seconds minimum and watch this loader.</p>
-            </Loading>;
+
+    if (fetchState === 'pending') {
+        console.log(`Loading task examples. Please wait ${time} seconds minimum and watch this loader.`);
+
+        return <Loading/>;
+    }
     
     return <>{children}</>;
 }

@@ -1,0 +1,62 @@
+.stage {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    box-sizing: border-box;
+}
+
+.spinner {
+    position: relative;
+    display: inline-block;
+    transform: translateZ(0);
+    /* rotate the whole ring */
+    animation: spinner-rotate 2s linear infinite;
+}
+
+/* One segment (12 of them). We position each by rotating by i*30deg
+   then translating outward so segments form a ring. */
+.segment {
+    --count: 12;
+    position: absolute;
+    width: 14%;   /* calc( ( (100% / 7) ) ) ~14% of container */
+    height: 36%; /* calc( ( (100% / 2.8) ) ) ~36% of container */
+    left: 43%; /* ( 100%  - 14% width ) / 2*/
+    top: 32%; /* ( 100% -36% height ) / 2 */
+    border-radius: 9px;
+    transform-origin: center center;
+    transform: rotate(calc(var(--i) * (360deg / var(--count)))) translate(0, -130%);
+    /* default background gradient that will be recolored via nth-child */
+    background: linear-gradient(180deg, var(--correct-light), var(--correct));
+    opacity: 0.9;
+    box-shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
+    /* slight blur to match soft look */
+    backface-visibility: hidden;
+}
+
+/* fade / color stops around the ring:
+   we set per-segment color and opacity so it looks like a gradient ring.
+   The first segment (i=0) is the darkest, following ones lighter. */
+.segment:nth-child(1)  { background: linear-gradient(180deg,#184c45,#169eb9); opacity:1 }
+.segment:nth-child(2)  { background: linear-gradient(180deg,#1f6a5f,#60b5b8); opacity:0.95 }
+.segment:nth-child(3)  { background: linear-gradient(180deg,#2a8a78,#7fc9c7); opacity:0.90 }
+.segment:nth-child(4)  { background: linear-gradient(180deg,#3ea3a0,#98d6d5); opacity:0.85 }
+.segment:nth-child(5)  { background: linear-gradient(180deg,#67b8b3,#addfdd); opacity:0.78 }
+.segment:nth-child(6)  { background: linear-gradient(180deg,#8fd0cc,#cfeeea); opacity:0.7 }
+.segment:nth-child(7)  { background: linear-gradient(180deg,#b7e5e3,#eaf9f8); opacity:0.6 }
+.segment:nth-child(8)  { background: linear-gradient(180deg,#b7e5e3,#eaf9f8); opacity:0.55 }
+.segment:nth-child(9)  { background: linear-gradient(180deg,#8fd0cc,#cfeeea); opacity:0.5 }
+.segment:nth-child(10) { background: linear-gradient(180deg,#67b8b3,#addfdd); opacity:0.45 }
+.segment:nth-child(11) { background: linear-gradient(180deg,#3ea3a0,#98d6d5); opacity:0.42 }
+.segment:nth-child(12) { background: linear-gradient(180deg,#2a8a78,#7fc9c7); opacity:0.4 }
+
+/* Anim: spin entire ring. This produces the rotating effect similar to the preview */
+@keyframes spinner-rotate {
+    from { transform: rotate(0deg); }
+    to   { transform: rotate(360deg); }
+}
+
+/* respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+    .spinner { animation: none; }
+}

@@ -11,7 +11,7 @@ const getRemainPhrase = (count: number) => {
         case 0:
             return NO_REMAIN_PHRASE;
         case 1:
-            return '1 ' + REMAIN_PHRASES.join(' ');
+            return '1 ' + REMAIN_PHRASES.join(' ') + 's';
         default:
             return count + ' ' + REMAIN_PHRASES.join('s ');
     }

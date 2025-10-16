@@ -7,7 +7,7 @@ import {FetchTodoContext, useTodosDispatch} from "../TodoContext/TodoContext";
 
 export default function ClearCompleted() {
     const dispatch = useTodosDispatch() as Function;
-    const isDisabled = useContext(FetchTodoContext) === 'pending';
+    const isShown = useContext(FetchTodoContext) !== 'pending';
 
     function handleClick() {
         dispatch({
@@ -15,12 +15,11 @@ export default function ClearCompleted() {
         });
     }
 
-    return (
+    return isShown ? (
             <Button
                 variant='secondary'
                 onClick={handleClick}
                 className={styles.clear}
-                disabled={isDisabled}
             >Clear completed</Button>
-    );
+    ) : null;
 }

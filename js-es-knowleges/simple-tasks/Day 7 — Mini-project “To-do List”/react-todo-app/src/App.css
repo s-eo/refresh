@@ -42,7 +42,7 @@ html, body, #root, .App {
 
 .shrinkable {
   flex: 1 1 0%;
-  min-height: min-content;
+  min-height: 0;
 }
 
 @media (min-width: 480px) {

@@ -1,7 +1,3 @@
-import React, {JSX, ReactNode, useContext} from 'react';
-
-import {FetchTodoContext} from "../TodoContext/TodoContext";
-import Loading from "../Loading/Loading";
 import {Todo} from "../../types/todo";
 import {promisifiedTimeout} from "../TodoContext/helper";
 
@@ -11,6 +7,7 @@ const time = Math.round(LOADER_TIME / 1000);
 const DEFAULT_ERROR = 'Can`t fetch example tasks';
 const ARTIFICIAL_ERROR = 'Error from notification bar. Next attempt should be successfull';
 
+// TODO lazy loading
 export const fetchTasks = async (): Promise<Todo[]> => new Promise(async (resolve, reject) => {
     try {
         const response = await fetch(TASKS_URL);
@@ -55,6 +52,7 @@ export function initialFetchManager(dispatch: Function | null, dispatchFetchTodo
         if (Array.isArray(initial)) {
             onNewTodos(initial);
         } else {
+            console.log(`Loading task examples. Please wait ${time} seconds minimum and watch this loader.`);
             dispatchFetchTodosState && dispatchFetchTodosState({ type: 'onLoad' });
 
             const isErrorNeeded = !isFirstErrorSent || !isFirstTrayErrorSent;
@@ -85,20 +83,4 @@ export function initialFetchManager(dispatch: Function | null, dispatchFetchTodo
                 });
         }
     }
-}
-
-interface Props {
-    children: ReactNode;
-}
-
-export default function FetchManager({children}: Props):JSX.Element {
-    const fetchState = useContext(FetchTodoContext);
-
-    if (fetchState === 'pending') {
-        console.log(`Loading task examples. Please wait ${time} seconds minimum and watch this loader.`);
-
-        return <Loading/>;
-    }
-    
-    return <>{children}</>;
 }

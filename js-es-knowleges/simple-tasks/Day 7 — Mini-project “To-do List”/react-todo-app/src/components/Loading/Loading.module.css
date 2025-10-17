@@ -2,11 +2,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 12px;
+    padding: 7%;
     box-sizing: border-box;
+    min-height: min-content;
+    overflow: hidden;
 }
 
 .spinner {
+    width: min(20vw, 20vh);
+    height: min(20vw, 20vh);
     position: relative;
     display: inline-block;
     transform: translateZ(0);

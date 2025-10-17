@@ -12,10 +12,7 @@ export default function Loading({ size = 160 }: Props) {
     return (
 
         <div className={styles.stage} role="status" aria-label="Loading">
-            <div
-                className={styles.spinner}
-                style={{width: size + "px", height: size + "px"}}
-            >
+            <div className={styles.spinner}>
                 {segments.map((_, i) => (
                     <div
                         key={i}

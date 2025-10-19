@@ -1,8 +1,8 @@
-import {GlobalNotification} from "../../types/notification";
+import {AppNotification} from "../../types/notification";
 
-type reducerArguments =  {
+export type notificationDispathType =  {
     type: "add";
-    payload: Omit<GlobalNotification, 'id'>;
+    payload: Omit<AppNotification, 'id'>;
 } | {
     type: "remove";
     payload: number;
@@ -10,7 +10,7 @@ type reducerArguments =  {
 
 let id = 0;
 
-export default function notificationReducer(currentNotifications: GlobalNotification[], { type, payload }: reducerArguments): GlobalNotification[] {
+export default function notificationReducer(currentNotifications: AppNotification[], { type, payload }: notificationDispathType): AppNotification[] {
     switch (type) {
         case "add":
             id += 1;

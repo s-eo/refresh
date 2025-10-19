@@ -10,7 +10,7 @@ interface Props {
 export default function RetryButton({ handleClick }: Props) {
     return (
         <Button
-            variant='notification'
+            variant='primary'
             onClick={handleClick}
             className={styles.actions}
         >Try again &#x21BA;</Button>

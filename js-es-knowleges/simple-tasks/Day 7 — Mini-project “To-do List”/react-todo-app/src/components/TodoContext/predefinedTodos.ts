@@ -8,7 +8,7 @@ const TASKS_URL = 'https://jsonplaceholder.typicode.com/todos';
 const LOADER_TIME = 2000; //ms
 const time = Math.round(LOADER_TIME / 1000);
 const DEFAULT_ERROR = 'Can`t fetch example tasks';
-const ARTIFICIAL_ERROR = 'Error from notification bar. Next attempt should be successfull';
+const ARTIFICIAL_ERROR = 'Next attempt should be successfull';
 
 // TODO lazy loading
 const fetchTasks = async (): Promise<Todo[]> => new Promise(async (resolve, reject) => {

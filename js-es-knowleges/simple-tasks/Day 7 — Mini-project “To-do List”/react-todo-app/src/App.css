@@ -22,6 +22,7 @@ html, body, #root, .App {
   overflow: auto;
   display: flex;
   justify-content: center;
+  align-items: stretch;
 }
 
 /*@media (prefers-color-scheme: dark) {*/

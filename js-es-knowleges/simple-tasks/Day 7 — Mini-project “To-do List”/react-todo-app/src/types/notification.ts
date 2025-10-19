@@ -1,8 +1,8 @@
-export type GlobalNotificationType = "error" | "success" | "warning";
+export type AppNotificationType = "error" | "success" | "warning";
 
-export interface GlobalNotification {
+export interface AppNotification {
     id: number;
-    type: GlobalNotificationType;
+    type: AppNotificationType;
     message: string;
     retryAction?: Function;
 }

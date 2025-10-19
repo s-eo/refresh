@@ -7,10 +7,10 @@
     --green-600: #20695f;
     --green-100: #eaf3f0;   /* light background for hover on non-active */
     --green-dark: #145b52;
-    --danger: #e74c3c;
     --background: #f4f8fc;
     --surface: #ffffff;
     --border: #e5e7eb;
+    --border-dark: #d1d5db;
     --text: #2c3e50;
     --text-secondary: #6b7b7b;
     --muted: #6b7280;
@@ -25,6 +25,14 @@
     --correct: #169eb9;
     --correct-light: #9fcbd1;  /* light teal */
     --success: #1b7d59;
+
+    /** rare colors for component details **/
+    /** button **/
+    --primary-shadow: #169eB999;
+    --shadow-off: #169EB900;
+
+    /**  checkbox **/
+    --border-hover: #9ca3af;
 }
 
 li {

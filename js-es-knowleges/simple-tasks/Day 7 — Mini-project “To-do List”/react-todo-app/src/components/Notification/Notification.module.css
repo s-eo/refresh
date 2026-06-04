@@ -1,3 +1,7 @@
+:root {
+    --dismiss-time: 4s;
+}
+
 /* Container fixed to top-right */
 .notificationContainer {
     position: fixed;
@@ -13,9 +17,10 @@
 
 .notificationCard {
     display: flex;
+    flex-wrap: wrap;
     flex-direction: row;
     align-items: start;
-    gap: 0.75rem;
+    gap: 1.25rem 0.75rem;
     border-radius: 6px;
     padding: 12px 16px;
     margin-bottom: 10px;
@@ -94,6 +99,14 @@
     to { opacity: 0; transform: translateX(100%); }
 }
 
+@keyframes progressBar {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0%;
+    }
+}
 
 /* Transition when one closes (slide others up) */
 .leave {
@@ -102,4 +115,14 @@
 
 .notificationContainer .notificationCard + .notificationCard {
     transition: transform 0.3s ease;
+}
+
+.progress {
+    height: 4px;
+    background: #ffffff;
+    width: 100%;
+    transform-origin: left;
+    flex: 0 100%;
+    border-radius: 10px;
+    /*animation: progressBar var(--dismiss-time) linear forwards;*/
 }

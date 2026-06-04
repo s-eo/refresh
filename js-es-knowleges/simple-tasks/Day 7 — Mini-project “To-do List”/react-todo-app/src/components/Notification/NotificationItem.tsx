@@ -62,8 +62,9 @@ export default function NotificationItem({ notification, dispatch }: Notificatio
             <div className={styles.main}>
                 <span>{message}</span>
                 {typeof retryAction === 'function' &&
-                <RetryButton handleClick={onRetry}/>
-            }
+                    <RetryButton handleClick={onRetry}/>
+                }
+                <div className={styles.progress}/>
             </div>
             <button className={styles.close} onClick={closeNotification}>
                 &times;

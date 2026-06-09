@@ -1,0 +1,2 @@
+use gemini with command 
+>  Please check the LCP of localhost:3000

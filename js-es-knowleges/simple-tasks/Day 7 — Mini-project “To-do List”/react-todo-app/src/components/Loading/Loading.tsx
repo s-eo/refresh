@@ -1,16 +1,26 @@
 import React from 'react';
 
-import Card from "../Card/Card";
+import styles from "./Loading.module.css";
 
 interface Props {
-    children?: React.ReactNode;
+    size?: number; // in px
 }
 
-export default function Loading({ children }: Props) {
+export default function Loading({ size = 160 }: Props) {
+    const segments: Array<undefined | HTMLDivElement> = Array.from({ length: 12 });
+
     return (
-        <Card>
-            <h2>🌀 Loading...</h2>
-            {children}
-        </Card>
+
+        <div className={styles.stage} role="status" aria-label="Loading">
+            <div className={styles.spinner}>
+                {segments.map((_, i) => (
+                    <div
+                        key={i}
+                        className={styles.segment}
+                        style={{["--i"]: i} as React.CSSProperties}
+                    />
+                ))}
+            </div>
+        </div>
     );
 }

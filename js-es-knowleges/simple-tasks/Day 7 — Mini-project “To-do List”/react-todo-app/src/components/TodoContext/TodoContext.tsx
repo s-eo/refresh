@@ -28,10 +28,10 @@ interface Props {
 export const TodoProvider = ({children}: Props) => {
     const [todos, dispatch] = useReducer(todoReducers, undefined);
     const [fetchTodosState, dispatchFetchTodosState] = useReducer(fetchTodoReducer, 'initial');
-    const dispatchNotifications = useContext(NotificationDispatchContext);
+    const dispatchNotification = useContext(NotificationDispatchContext);
 
     // set initial todos async
-    usePredefinedTodos({dispatch, dispatchFetchTodosState, dispatchNotifications});
+    usePredefinedTodos({dispatch, dispatchFetchTodosState, dispatchNotification});
 
     // save all changes to Local Storage
     useEffect(() => {

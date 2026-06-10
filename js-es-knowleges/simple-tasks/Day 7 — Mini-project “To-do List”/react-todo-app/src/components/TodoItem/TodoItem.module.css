@@ -11,8 +11,23 @@
     justify-content: space-between;
     padding: 0.75rem 0;
     background: white;
-    transition: background-color var(--transition), transform var(--transition);
+    transition: all 0.2s ease;
     gap: 0.5rem;
+    animation: fadeIn 0.4s ease forwards;
+}
+
+.container.removing {
+    animation: fadeOut 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; transform: translateY(0); }
+    to { opacity: 0; transform: translateY(-5px); }
 }
 
 .container:last-child {
@@ -38,7 +53,7 @@
     -moz-appearance: none;
     flex: 0 0 18px;
     height: 18px;
-    border: 1px solid #d1d5db; /* light gray border */
+    border: 1px solid var(--border-dark);
     border-radius: 4px;
     background-color: #ffffff;
     cursor: pointer;
@@ -48,12 +63,14 @@
 }
 
 .checkbox:hover {
-    border-color: #9ca3af; /* subtle darker border on hover */
+    border-color: var(--border-hover);
+    transform: scale(0.95);
 }
 
 .checkbox:checked {
-    background-color: var(--correct); /* ✅ correct teal color from your mockup */
-    border-color: #169eb9;
+    background-color: var(--correct);
+    border-color: var(--correct);
+    transform: scale(1.15);
 }
 
 .checkbox:checked::after {
@@ -78,7 +95,7 @@
     color: var(--primary-dark);
     font-size: 0.95rem;
     font-weight: 500;
-    transition: color var(--transition), text-decoration var(--transition);
+    transition: all 0.2s ease;
 }
 
 /* completed task */

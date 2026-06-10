@@ -15,15 +15,21 @@ interface Props {
 
 export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
     const { id, completed, title, deadline: dLTimestamp } = todo;
+    const [toDelete, setToDelete] = React.useState<boolean>(false);
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => toggleTodo(id);
-    const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => deleteTodo(id);
+    const handleDelete = (event: React.MouseEvent<HTMLButtonElement>) => {
+        setTimeout(() => {
+            deleteTodo(id);
+        }, 300);
+        setToDelete(true);
+    }
 
     const deadline = useMemo(() => dLTimestamp ? new Date(+dLTimestamp).toDateString() : '', [dLTimestamp]);
     const isStale = useMemo(() => dLTimestamp ? +dLTimestamp < Date.now() : false, [dLTimestamp]);
 
     return (
-        <li className={clsx(styles.container, completed && styles.completed)}>
+        <li className={clsx(styles.container, completed && styles.completed, toDelete && styles.removing)}>
             <input
                 type="checkbox"
                 checked={completed}

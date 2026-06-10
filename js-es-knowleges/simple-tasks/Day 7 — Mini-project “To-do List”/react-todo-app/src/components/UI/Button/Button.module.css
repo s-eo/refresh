@@ -26,9 +26,16 @@
     outline: 2px solid rgba(255, 255, 255, 0.7);
 }
 
+/*** Success Primary Button main scenario  ****/
 .primary {
     background-color: var(--primary-dark); /* deep green background */
     color: white;
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 var(--primary-shadow); }
+    70% { box-shadow: 0 0 0 8px var(--shadow-off); }
+    100% { box-shadow: 0 0 0 0 var(--shadow-off); }
 }
 
 .primary:focus {
@@ -36,6 +43,7 @@
 }
 .primary:hover:not(:disabled) {
     background-color: var(--green-600);
+    animation: pulse 2s infinite;
 }
 
 .primary:active:not(:disabled) {

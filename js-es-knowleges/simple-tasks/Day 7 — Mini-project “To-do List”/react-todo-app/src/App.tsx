@@ -10,7 +10,6 @@ import ClearCompleted from "./components/ClearCompleted/ClearCompleted";
 import TodoFilter from "./components/TodoFilter/TodoFilter";
 import FunctionalityRow from "./components/FunctionalityRow/FunctionalityRow";
 import RemainPanel from "./components/RemainPanel/RemainPanel";
-import FetchManager from "./components/FetchManager/FetchManager";
 
 import './App.css';
 import NotificationManager from "./components/Notification/NotificationManager";
@@ -35,9 +34,7 @@ function App() {
                       </FunctionalityRow>
                   </Card>
                   <Card className="shrinkable">
-                      <FetchManager>
-                          <TodoList filter={filter} />
-                      </FetchManager>
+                      <TodoList filter={filter} />
                   </Card>
                   <Card>
                       <ClearCompleted />

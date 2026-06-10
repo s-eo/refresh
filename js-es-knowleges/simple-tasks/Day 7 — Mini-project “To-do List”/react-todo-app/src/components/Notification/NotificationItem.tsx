@@ -17,7 +17,18 @@ import errorIcon from "../../assets/exclamation.svg";
 import styles from "./Notification.module.css";
 
 const AUTO_DISMISS_DURATION = 5000;
+const AUTO_DISMISS_PROPERTY = '--dismiss-time';
 const LEAVE_TRANSITION_DURATION = 1000;
+
+const getDismissDuration = (element: HTMLElement | null): number => {
+    if (element) {
+        const rootStyles = getComputedStyle(element);
+
+        return +rootStyles.getPropertyValue(AUTO_DISMISS_PROPERTY).trim().slice(0, -1);
+    }
+
+    return AUTO_DISMISS_DURATION;
+}
 
 interface NotificationItemProps{
     notification: AppNotification;
@@ -47,11 +58,13 @@ export default function NotificationItem({ notification, dispatch, hasClose = fa
         closeNotification(event);
     }, [closeNotification, retryAction]);
 
+    const dismissTime = useMemo(() => getDismissDuration(rootElement.current), [rootElement]);
+
     // Auto dismiss
     useEffect(() => {
-        const timer = setTimeout(closeNotification, AUTO_DISMISS_DURATION);
+        const timer = setTimeout(closeNotification, dismissTime);
         return () => clearTimeout(timer);
-    }, [closeNotification]);
+    }, [closeNotification, dismissTime]);
 
     return (
         <div

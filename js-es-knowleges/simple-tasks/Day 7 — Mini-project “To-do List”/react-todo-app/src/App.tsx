@@ -33,7 +33,7 @@ function App() {
                           <RemainPanel />
                       </FunctionalityRow>
                   </Card>
-                  <Card className="shrinkable">
+                  <Card className="shrinkable" role="main">
                       <TodoList filter={filter} />
                   </Card>
                   <Card>

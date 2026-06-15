@@ -35,11 +35,12 @@ export default function TodoItem({ todo, toggleTodo, deleteTodo }: Props) {
                 checked={completed}
                 onChange={handleChange}
                 className={styles.checkbox}
+                id={'checkbox-' + id}
             />
             <div className={styles.main}>
-                <span className={styles.title}>
+                <label htmlFor={'checkbox-' + id} className={styles.title}>
                   {title}
-                </span>
+                </label>
                 {deadline && (<div className={clsx(styles.deadline, isStale ? styles.overdue : styles.upcoming)}>
                     Due: {deadline}
                 </div>)}

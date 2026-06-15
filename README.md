@@ -1,7 +1,7 @@
-# refresh
+# Mini-project “To-do List” (React + TS)
 Simple handwritten react todo app to refresh my knowledge and get on track
 
-# Mini-project “To-do List” (React + TS)
+You can see build application [here](https://pet-refresh.netlify.app/)
 
 ## Goal:
 

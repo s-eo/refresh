@@ -1,2 +1,2 @@
 # refresh
-Refresh my knowleges to get on track
+Simple handwritten react todo app to refresh my knowleges and get on track

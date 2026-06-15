@@ -1,18 +1,21 @@
-import React, {useState} from 'react';
+import React, {lazy, useState, Suspense} from 'react';
 
 import {Filter} from "./types/filter";
 
 import {TodoProvider} from "./components/TodoContext/TodoContext";
-import NewTodoItem from "./components/NewTodoItem/NewTodoItem";
+import NewItemLoader from "./components/NewTodoItem/Loader";
 import TodoList from "./components/TodoList/TodoList";
 import Card from "./components/Card/Card";
 import ClearCompleted from "./components/ClearCompleted/ClearCompleted";
 import TodoFilter from "./components/TodoFilter/TodoFilter";
 import FunctionalityRow from "./components/FunctionalityRow/FunctionalityRow";
 import RemainPanel from "./components/RemainPanel/RemainPanel";
+import NotificationManager from "./components/Notification/NotificationManager";
 
 import './App.css';
-import NotificationManager from "./components/Notification/NotificationManager";
+
+const NewTodoItem = lazy(() =>
+    import("./components/NewTodoItem/NewTodoItem"));
 
 
 function App() {
@@ -27,7 +30,9 @@ function App() {
           <NotificationManager>
               <TodoProvider>
                   <Card>
-                      <NewTodoItem />
+                      <Suspense fallback={<NewItemLoader />}>
+                          <NewTodoItem />
+                      </Suspense>
                       <TodoFilter filter={filter} setFilter={setFilter}/>
                       <FunctionalityRow>
                           <RemainPanel />

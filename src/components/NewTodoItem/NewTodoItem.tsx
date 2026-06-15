@@ -59,7 +59,7 @@ export default function NewTodoItem() {
     return (
         <form
             onSubmit={handleAddingTask}
-            className={styles.form}
+            className={styles.wrapper}
         >
             <FunctionalityRow className={styles.inputLine}>
                 <input

@@ -1,3 +1,11 @@
+.wrapper {
+    height: 6rem;
+}
+
+.loader {
+    text-align: center;
+}
+
 .name {
     flex: 1;
     border: 1px solid var(--border);

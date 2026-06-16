@@ -17,6 +17,7 @@ export default function Loading({ size = 160 }: Props) {
                     <div
                         key={i}
                         className={styles.segment}
+                        // eslint-disable-next-line
                         style={{["--i"]: i} as React.CSSProperties}
                     />
                 ))}
